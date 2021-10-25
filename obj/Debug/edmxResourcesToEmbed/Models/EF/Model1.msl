@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FurnitureModelStoreContainer" CdmEntityContainer="FurnitureEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="FurnitureModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Carts">
+      <EntityTypeMapping TypeName="FurnitureModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="IdCart" ColumnName="IdCart" />
+          <ScalarProperty Name="IdCu" ColumnName="IdCu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="FurnitureModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="IdCu" ColumnName="IdCu" />
+          <ScalarProperty Name="NameCu" ColumnName="NameCu" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DesignFurnitures">
+      <EntityTypeMapping TypeName="FurnitureModel.DesignFurniture">
+        <MappingFragment StoreEntitySet="DesignFurniture">
+          <ScalarProperty Name="IdDe" ColumnName="IdDe" />
+          <ScalarProperty Name="NameDe" ColumnName="NameDe" />
+          <ScalarProperty Name="NameProject" ColumnName="NameProject" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ImageDe" ColumnName="ImageDe" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailCarts">
+      <EntityTypeMapping TypeName="FurnitureModel.DetailCart">
+        <MappingFragment StoreEntitySet="DetailCart">
+          <ScalarProperty Name="IdDeCart" ColumnName="IdDeCart" />
+          <ScalarProperty Name="IdCart" ColumnName="IdCart" />
+          <ScalarProperty Name="IdGoods" ColumnName="IdGoods" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="SumMoney" ColumnName="SumMoney" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ReadyBuy" ColumnName="ReadyBuy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailImportGoods">
+      <EntityTypeMapping TypeName="FurnitureModel.DetailImportGood">
+        <MappingFragment StoreEntitySet="DetailImportGoods">
+          <ScalarProperty Name="IdDeIm" ColumnName="IdDeIm" />
+          <ScalarProperty Name="IdIm" ColumnName="IdIm" />
+          <ScalarProperty Name="IdGoods" ColumnName="IdGoods" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="SumMoney" ColumnName="SumMoney" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailOrders">
+      <EntityTypeMapping TypeName="FurnitureModel.DetailOrder">
+        <MappingFragment StoreEntitySet="DetailOrder">
+          <ScalarProperty Name="IdDeOrder" ColumnName="IdDeOrder" />
+          <ScalarProperty Name="IdDeCart" ColumnName="IdDeCart" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DisCounts">
+      <EntityTypeMapping TypeName="FurnitureModel.DisCount">
+        <MappingFragment StoreEntitySet="DisCount">
+          <ScalarProperty Name="IdDi" ColumnName="IdDi" />
+          <ScalarProperty Name="IdGoods" ColumnName="IdGoods" />
+          <ScalarProperty Name="Price2" ColumnName="Price2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Goods">
+      <EntityTypeMapping TypeName="FurnitureModel.Good">
+        <MappingFragment StoreEntitySet="Goods">
+          <ScalarProperty Name="IdGoods" ColumnName="IdGoods" />
+          <ScalarProperty Name="IdTypeG" ColumnName="IdTypeG" />
+          <ScalarProperty Name="NameGoods" ColumnName="NameGoods" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Material" ColumnName="Material" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Recommend" ColumnName="Recommend" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImportGoods">
+      <EntityTypeMapping TypeName="FurnitureModel.ImportGood">
+        <MappingFragment StoreEntitySet="ImportGoods">
+          <ScalarProperty Name="IdIm" ColumnName="IdIm" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="IdSu" ColumnName="IdSu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListRequests">
+      <EntityTypeMapping TypeName="FurnitureModel.ListRequest">
+        <MappingFragment StoreEntitySet="ListRequest">
+          <ScalarProperty Name="IdRe" ColumnName="IdRe" />
+          <ScalarProperty Name="DateRe" ColumnName="DateRe" />
+          <ScalarProperty Name="NameCustomer" ColumnName="NameCustomer" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="TypeProject" ColumnName="TypeProject" />
+          <ScalarProperty Name="Service" ColumnName="Service" />
+          <ScalarProperty Name="ContentRequest" ColumnName="ContentRequest" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListTypeGoods">
+      <EntityTypeMapping TypeName="FurnitureModel.ListTypeGood">
+        <MappingFragment StoreEntitySet="ListTypeGoods">
+          <ScalarProperty Name="IdTypeG" ColumnName="IdTypeG" />
+          <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
+          <ScalarProperty Name="NameTypeG" ColumnName="NameTypeG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubImgDesigns">
+      <EntityTypeMapping TypeName="FurnitureModel.SubImgDesign">
+        <MappingFragment StoreEntitySet="SubImgDesign">
+          <ScalarProperty Name="IdSub" ColumnName="IdSub" />
+          <ScalarProperty Name="IdDe" ColumnName="IdDe" />
+          <ScalarProperty Name="ImageSubDe" ColumnName="ImageSubDe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="FurnitureModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="IdSu" ColumnName="IdSu" />
+          <ScalarProperty Name="NameSu" ColumnName="NameSu" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="FurnitureModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TableComments">
+      <EntityTypeMapping TypeName="FurnitureModel.TableComment">
+        <MappingFragment StoreEntitySet="TableComment">
+          <ScalarProperty Name="IdCommnet" ColumnName="IdCommnet" />
+          <ScalarProperty Name="IdGoods" ColumnName="IdGoods" />
+          <ScalarProperty Name="IdCu" ColumnName="IdCu" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Quality" ColumnName="Quality" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeGoods">
+      <EntityTypeMapping TypeName="FurnitureModel.TypeGood">
+        <MappingFragment StoreEntitySet="TypeGoods">
+          <ScalarProperty Name="IdType" ColumnName="IdType" />
+          <ScalarProperty Name="NameType" ColumnName="NameType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubImages">
+      <EntityTypeMapping TypeName="FurnitureModel.SubImage">
+        <MappingFragment StoreEntitySet="SubImage">
+          <ScalarProperty Name="IdSubImage" ColumnName="IdSubImage" />
+          <ScalarProperty Name="IdGoods" ColumnName="IdGoods" />
+          <ScalarProperty Name="SubImage1" ColumnName="SubImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Contact";
+
+
+}
+ @model GraduationProject.Models.EF.ListRequest
+<style>
+    .typeProject li {
+        display: inline-block;
+        margin-right: 20px;
+        font-size: 20px;
+    }
+
+        .typeProject li input {
+            padding: 10px;
+            width: 30px;
+            height: 30px
+        }
+</style>
+<div style="color:red; ">
+    <h3>@ViewBag.Message</h3>
+</div>
+<div style="margin-right:5px">
+    <img src="~/images/thiet-ke-noi-that-5.png" / style="width:100%">
+    @using (Html.BeginForm("ContactDesign", "Home"))
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <h1><b>THÔNG TIN CÁ NHÂN</b> </h1>
+                </div>
+                <div style="font-size:19px">
+                     @Html.TextBoxFor(model=>model.NameCustomer, new { @class="form-control", @placeholder="Họ và tên", @style= "padding:30px; max-width:500px; font-size:18px"})<br />
+                    @Html.TextBoxFor(model=>model.Email, new { @class="form-control", @placeholder="Email", @style= "padding:30px; max-width:500px; font-size:18px"})<br />
+                    @Html.TextBoxFor(model=>model.Phone, new { @class="form-control", @placeholder="Số điện thoại",@type="number", @style= "padding:30px; max-width:500px; font-size:18px"})<br />
+                    @Html.TextBoxFor(model=>model.Adress, new { @class="form-control", @placeholder="Địa chỉ", @style= "padding:30px; max-width:500px; font-size:18px"})<br />
+
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <h1><b>THÔNG TIN LIÊN HỆ</b> </h1>
+                </div>
+                <div style="font-size:19px">
+                    Unique Decor có sứ mệnh đem những sản phẩm nội thất đạt chất lượng hàng đầu với giá thành cạnh tranh đến tay người tiêu dùng.
+                    Tham vọng của Unique Decor là trở thành thương hiệu nội thất Việt trên thị trường quốc tế.
+                    <br /><b>Trụ sở văn phòng:</b>  Số E9, Lô A10, KĐT Nam Trung Yên, Cầu Giấy
+                    <br /> <b>Thời gian làm việc:</b>  8h – 17h30 kể cả thứ 7
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <h1><b>THÔNG TIN YÊU CẦU</b> </h1>
+            <div>
+                <h3><b>Loại hình dự án</b></h3>
+            </div>
+            <div>
+                <ul class="typeProject">
+                    <li>
+                        <input onclick="getCheckbox('canho')" data-value="căn hộ" id="canho" value="" name="canho" type="checkbox"  />
+                    </li>
+                    <li>Căn hộ</li>
+                    <li>
+
+                        <input onclick="getCheckbox('bietthu')" data-value="biệt thự" id="bietthu" value="" name="bietthu" type="checkbox" />
+                    </li>
+                    <li>Biệt thự</li>
+                    <li>
+                        <input onclick="getCheckbox('nhao')" data-value="nhà ở" id="nhao" value="" type="checkbox" />
+                    </li>
+                    <li>Nhà ở</li>
+                </ul>
+
+            </div>
+            <div style="margin-top:20px">
+                <h3><b>Dịch vụ yêu cầu</b></h3>
+            </div>
+            <div>
+                <ul class="typeProject">
+                    <li>
+                        <input onclick="getCheckbox('thietke')" data-value="thiết kế nội thất" id="thietke" name="thietkenoithat"  type="checkbox" />
+                    </li>
+                    <li>Thiết kế nội thất</li>
+                    <li>
+
+                        <input onclick="getCheckbox('thicong')" data-value="thi công nội thất" id="thicong" name="thicongnoithat"  type="checkbox" />
+                    </li>
+                    <li>Thi công nội thất</li>
+
+
+                </ul>
+
+            </div>
+            <div>
+                <h3><b>Yêu cầu thêm</b></h3>
+            </div>
+            <div>
+                @Html.TextAreaFor(model=>model.ContentRequest, new {@style= "width: 500px; max-width: 500px; height: 100px; padding: 10px;height:130px", @placeholder = "Nội dung" })
+ 
+            </div>
+        </div>
+        <input style="margin-left: 200px; background: #627aaf; padding: 15px; font-size: 16px;" class="btn btn-success" type="submit" value="Gửi yêu cầu" />
+    }
+    <script>
+        function getCheckbox(type) {
+            if ($('#' + type).is(':checked') == true) {
+                $('#' + type).attr("value", $('#' + type).data().value);
+             
+            }
+            else {
+                $('#' + type).attr("value", "");
+            
+            }
+        }
+  
+    </script>
+</div>
+

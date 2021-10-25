@@ -1,0 +1,237 @@
+﻿@model GraduationProject.Models.EF.ListRequest
+@{
+    ViewBag.Title = "DesignFurniture";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var designFurniture=(List<GraduationProject.Models.EF.DesignFurniture>)ViewBag.designFurniture;
+
+}
+<div style="color:red; ">
+    <h3>@ViewBag.Message</h3> 
+</div>
+<style>
+    .process {
+        margin-top: 20px;
+    }
+
+    .txt {
+        color: white;
+        width: 520px;
+        opacity: 0;
+        height: 205px;
+        position: absolute;
+        bottom: 50%;
+    }
+
+    .img {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .img:hover .txt {
+            opacity: 1;
+            transform: translateY(150px);
+            transition: ease-in-out 0.5s;
+        }
+
+        .img:hover img {
+            transform: scale(1.5);
+        }
+</style>
+<div style="font-size:16px">
+    <h2 style="text-align:center">DỊCH VỤ TƯ VẤN THIẾT KẾ NỘI THẤT</h2>
+    <div><h2 style="color: #4040f3; font-weight: bold">Lí do bạn nên chọn chúng tôi để được tư vấn thiết kế nội thất ?</h2></div>
+    <div class="row">
+        <div class="col-md-6">
+            – Thương hiệu uy tín: Sơn Việt là thương hiệu mạnh và uy tín về tư vấn thiết kế trên thị trường với bề dày gần 20 năm kinh nghiệm. Khách hàng của chúng tôi là hàng trăm gia đình, cư dân tại khu đô thị cao cấp, hàng trăm công ty, khách sạn, nhà hàng, spa, showroom…lớn nhỏ trong và ngoài nước.
+
+            <br />
+            – Đội ngũ nhân sự: Wedo sở hữu nguồn nhân lực là đội ngũ đông đảo các kiến trúc sư giỏi, đã trải qua quá trình đào tạo, rèn luyện từ các trường danh tiếng trên thế giới và trong nước cùng quá trình làm việc tại các môi trường chuyên nghiệp, luôn là những người tiên phong cập nhật những xu hướng thiết kế mới của thời đại, sáng tạo cho mỗi công trình.
+            <br />
+            – Chuyên nghiệp: Quy trình làm việc khoa học, rõ ràng, quy củ, đảm bảo các nguyên tắc làm việc minh bạch nhằm mang đến niềm tin tuyệt đối dành cho các khách hàng.
+            <br />
+
+            – Phong cách thiết kế: Hoàn toàn độc đáo và khác biệt, làm hài lòng khách hàng 100%. Mọi công trình đều được tính toán kỹ lưỡng, mang tính thẩm mỹ cao.
+            <br />
+            – Ưu đãi khách hàng: Mọi khách hàng đều được miễn phí về tư vấn khi sử dụng dịch vụ thiết kế nội thất.
+            <br />
+            – Có xưởng sản xuất riêng: Là một trong số ít các đơn vị tư vấn thiết kế có xưởng sản xuất riêng ( rộng hơn 2000m2), máy móc hiện đại, đội ngũ thợ lành nghề, đảm bảo 100% giá trị thiết kế tại các sản phẩm được thi công thực tế.
+            <br />
+            – Tư vấn thiết kế và thi công trọn gói: Wedo là số ít đơn vị tư vấn thiết kế nội thất cung cấp đồng bộ, trọn gói quy trình khép kín của một dự án, từ khâu tư vấn- thiết kế- sản xuất đến thi công nội thất, mang đến tính chính xác trong từng chi tiết và giảm chi phí tối đa cho chủ đầu tư.
+            <br />
+            – Bảo hành dài hạn, bảo trì vĩnh viễn: Cam kết bảo hành, bảo trì toàn bộ hạng mục công trình kể từ ngày bàn giao cho khách hàng.
+            <br />
+
+        </div>
+        <div class="col-md-6">
+            <img style="width: 100%; height: 500px; border: 2px solid #9d9d9d" src="~/images/DesignFurniture/cong-ty-bictweb-02.png" />
+        </div>
+    </div>
+    <div>
+        <h2 style="color: #4040f3; font-weight: bold">Các dịch vụ tư vấn thiết kế nội thất tại Sơn Việt</h2>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="img">
+                <img style="width: 100%; transition: transform 1s; border: 2px solid #9d9d9d;" src="~/images/DesignFurniture/lua_chon_cong_ty_thiet_ke_noi_that_1_58c2f2712d.jpg" />
+                @*<div class="txt">
+                        NaDu Design tự tin đáp ứng được những đòi hỏi khắt khe của khách hàng, thể hiện bằng những bản vẽ chặt chẽ và chi tiết. Chúng tôi tư vấn thiết kế nội thất trên các lĩnh vực:...<br />
+                        <a href="#">Xem thêm</a>
+                    </div>*@
+            </div>
+
+        </div>
+        <div>
+            <div class="col-md-6" style="padding-top:20px">
+
+                – Tư vấn thiết kế nội thất chung cư
+                <br />
+                – Tư vấn thiết kế nội thất biệt thự: cổ điển, tân cổ điển, hiện đại
+                <br />
+                – Tư vấn thiết kế nội thất hoặc cải tạo nội thất theo phân khu chức năng của các không gian công trình: tư vấn thiết kế nội thất phòng khách, thiết kế nội thất phòng bếp, thiết kế nội thất phòng ngủ, phòng thờ, phòng giám đốc, phòng họp…
+                <br />
+                – Tư vấn thiết kế nội thất nhà hàng
+                <br />
+                – Tư vấn thiết kế nội thất khách sạn
+                <br />
+                – Tư vấn thiết nội thất: showroom, spa, phòng karaoke…
+            </div>
+        </div>
+    </div>
+    <div>
+        <h2 style="color: #4040f3; font-weight: bold">Quy trình thực hiện</h2>
+    </div>
+    <img src="~/images/DesignFurniture/tvtk-02.png" style="width:100%" />
+    <div>
+        <div class="process">
+            <b>Bước 1: Tiếp nhận thông tin và khảo sát</b>
+            <br />
+            Tổng hợp các yêu cầu của khách hàng về dạng công trình (căn hộ, biệt thự, nhà phố); mức độ thiết kế (cung cấp sản phẩm, cải tạo, thiết kế mới);…sau đó tiến hành khảo sát hiện trạng mặt bằng, đo đạc thực tế.
+        </div>
+
+        <div class="process">
+            <b>Bước 2: Thiết kế ý tưởng</b>
+            <br />
+            Dựa trên các thông tin thu thập từ khách hàng kết hợp với khảo sát hiện trạng, thiết kế Nhà Xinh sẽ lên ý tưởng, giải pháp không gian mặt bằng, bố trí thỏa mãn tất cả các yêu cầu và mục tiêu đề ra. Đến thời điểm này chúng tôi có thể lên dự toán sơ bộ chi phí đầu tư cho khách hàng nắm rõ, dựa trên bảng vẽ mặt bằng không gian đã thống nhất trước đó.
+            <br />
+        </div>
+        <div class="process">
+            <b>Bước 3: Thiết kế phối cảnh 3D</b>
+            <br />
+            Dựa trên mặt bằng đã được khách hàng duyệt thiết kế Nhà Xinh sẽ thể hiện cho khách hàng thấy rõ không gian nội thất bên trong một cách cụ thể và sống động qua phương pháp vẽ phối cảnh 3D. Thể hiện đầy đủ màu sắc, chất liệu vật liệu để khách hàng thấy rõ không gian và nội thất của căn phòng mình trước khi thi công.
+
+            <br />
+        </div>
+        <div class="process">
+            <b>Bước 4: Ký hợp đồng thi công</b>
+            <br />
+
+            Sau khi chỉnh sửa thiết kế 3D cuối cùng giữa thiết kế Nhà Xinh và khách hàng. Hai bên sẽ tiến đến ký kết hợp đồng thi công theo bảng dự toán báo giá cuối cùng dựa trên thiết kế khách hàng đã duyệt.
+            <br />
+        </div>
+        <div class="process">
+            <b>Bước 5: Triển khai thi công</b>
+            <br />
+
+            Đội ngũ giám sát kết hợp với thiết kế Nhà Xinh sẽ triển khai thi công tại công trình theo tiến độ đã đưa ra.
+            <br />
+        </div>
+        <div class="process">
+
+            <b>Bước 6: Nghiệm thu bàn giao</b>
+            <br />
+        </div>
+        Tiến hành nghiệm thu và bàn giao công trình sau khi hoàn tất các hạng mục thi công. Bên Nhà Xinh sẽ tiến hành vệ sinh toàn bộ công trình, hướng dẫn khách hàng sử dụng sản phẩm, lập biên bản nghiệm thu, bàn giao công trình.
+    </div>
+    <div>
+        <h2 style="color: #4040f3; font-weight: bold">Một số mẫu thiết kế nội thất</h2>
+    </div>
+    <div class="row">
+        <div>
+            Dựa trên mặt bằng căn hộ điển hình của các dự án sắp bàn giao, AKA Furniture Company thực hiện những mẫu thiết kế là sự kết hợp nhiều phong cách khác nhau, giúp Quý khách có thêm ý tưởng để hoàn thiện căn hộ của mình. Đặc biệt: Với những dự án trong danh sách dưới đây,
+            AKA Furniture Company ưu đãi dành riêng và áp dụng cho các thương hiệu thuộc AKA Furniture Company như Nhà Xinh, BoConcept, Calligaris, Ligne Roset, Lago...
+            <p></p>
+            <div class="row">
+                @foreach (var d in designFurniture)
+                {
+
+                    <div class="col-md-6" style="margin-bottom:20px">
+                        <center>
+                            <div class="img">
+                                <img src="@d.ImageDe" style="transition: transform 1s; border: 2px solid #9d9d9d;" />
+                                <div class="txt">
+                                    <a href="@Url.Action("DetailDesign","DesignFurniture", new { id=d.IdDe})" style="background:#3d71ce; text-decoration:none; color:white; padding:10px; font-weight:bold">Xem chi tiết</a>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="text-transform:uppercase; font-weight:bold">@d.NameDe</h4>
+                            </div>
+
+                        </center>
+
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <div>
+            <h2>LIÊN HỆ</h2>
+        </div>
+        <div>
+            Quý khách có nhu cầu thiết kế không gian nội thất, hãy liên hệ với chúng tôi.
+            <br />
+            Số điện thoại: 0945421538   <br />
+            Email: trunglethanh6@gmail.com <br />
+        </div>
+        <div style="margin-top:20px">
+        @using (Html.BeginForm("RequestDesign", "DesignFurniture"))
+        {
+            <table>
+                <tr>
+                    <td>Họ và tên:</td>
+ 
+                    <td>
+                        @Html.TextBoxFor(model => model.NameCustomer, new { @class = "form-control", @style = "padding:2px; max-width:500px" })
+                    </td>
+                </tr>
+                <tr style="height:80px">
+                    <td>Địa chỉ:</td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Adress, new { @class = "form-control", @style = "padding:2px; max-width:500px" })
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Số điện thoại:</td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control",  @type = "number", @style = "padding:2px; max-width:500px; width:500px" })<br />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "email", @style = "padding:2px; max-width:500px" })<br />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Yêu cầu</td>
+                    <td>@Html.TextAreaFor(model=>model.ContentRequest, new { @style= "max-width:500px; width:500px; height:150px; padding:2px" , @required="required"})</td>
+
+                </tr>
+                <tr>
+                    <td><input style="padding:10px; margin-left:20px;" type="submit" value="Gửi" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        }
+        </div>
+    </div>
+</div>
+
+
+    

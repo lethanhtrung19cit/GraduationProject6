@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "myComment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var myComment = (List<GraduationProject.Models.GoodsModel>)ViewBag.myComment;
+    var listQuality = (List<GraduationProject.Models.EF.TableComment>)ViewBag.listQuality;
+
+}
+
+<h2>Nhận xét của tôi</h2>
+@if (myComment.Count<1)
+{
+    <div style="height:300px">
+        Chưa có nhận xét nào
+    </div>
+}
+else
+{ 
+<div>
+    @foreach (var item in myComment)
+    {
+        <div><img style="width:200px" src="@item.goodsModel.Image" /> </div>
+        <div>Tên sản phẩm: <b>@item.goodsModel.NameGoods</b></div>
+        int count = 0; int average = 0;
+        foreach (var a1 in listQuality)
+        {
+
+            if (item.goodsModel.IdGoods == a1.IdGoods)
+            {
+                count++;
+                string quality = a1.Quality.ToString();
+                average += int.Parse(quality);
+            }
+
+        }
+        if (average != 0)
+        {
+            average /= count;
+
+        }
+
+        <div>
+            Đánh giá của tôi: <br />
+            @for (int i = 0; i < average; i++)
+            {
+                <i style="color: #b9b94f" class="fa fa-star"></i>
+            }
+            <br />
+            @item.tableCommentModel.Comment
+        </div>
+    }
+</div>
+}
+

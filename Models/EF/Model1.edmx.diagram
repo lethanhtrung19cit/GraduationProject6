@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c8ee5be53074d4e941a1bd69db42845" Name="Diagram1">
+        <EntityTypeShape EntityType="FurnitureModel.Account" Width="1.5" PointX="6" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.Cart" Width="1.5" PointX="10.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.Customer" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.DesignFurniture" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.DetailCart" Width="1.5" PointX="12.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.DetailImportGood" Width="1.5" PointX="14.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.DetailOrder" Width="1.5" PointX="15" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.DisCount" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.Good" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.ImportGood" Width="1.5" PointX="12" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.ListRequest" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.ListTypeGood" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.SubImgDesign" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.Supplier" Width="1.5" PointX="9.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.sysdiagram" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.TableComment" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.TypeGood" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FurnitureModel.SubImage" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="FurnitureModel.FK_Customer_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_Cart_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_DetailCart_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_TableComment_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_SubImgDesign_DesignFurniture" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_DetailOrder_DetailCart" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_DetailImportGoods_ImportGoods" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_DisCount_Goods" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_Goods_ListTypeGoods" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_SubImage_Goods" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_TableComment_Goods" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_ImportGoods_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="FurnitureModel.FK_ListTypeGoods_TypeGoods" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

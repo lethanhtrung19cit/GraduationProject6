@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "Information";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    var info = (List<GraduationProject.Models.GoodsModel>)ViewBag.Info;
+}
+@model GraduationProject.Models.EF.Customer
+<style>
+    .col-md-4 {
+        margin-top:20px;
+    }
+    .col-md-8{
+        margin-top:20px;
+    }
+    .form-control{
+        max-width:500px;
+    }
+</style>
+<h2>Hồ sơ của tôi</h2>
+
+<div class="row">
+
+    @foreach (var a in info)
+    {
+        using (Html.BeginForm("editInfo", "Account"))
+        {
+            <div class="col-md-4">
+                Họ Tên
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model=>model.NameCu,  new { @class = "form-control", @Value =a.customerModel.NameCu})
+ 
+            </div>
+            <div class="col-md-4">
+                Ngày sinh
+            </div>
+            <div class="col-md-8">
+                Ngày
+                <select name="Day">
+                    @if (a.customerModel.DateOfBirth != null)
+                    {
+                        for (int i = 1; i <= 31; i++)
+                        {
+                            if (i != a.customerModel.DateOfBirth.Value.Day)
+                            {
+                                <option value="@i">@i</option>
+
+                            }
+                            else
+                            {
+                                <option selected="selected" value="@a.customerModel.DateOfBirth.Value.Day">@a.customerModel.DateOfBirth.Value.Day</option>
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 1; i <= 31; i++)
+                        {
+                             
+                                <option value="@i">@i</option>
+
+                             
+                        }
+                    }
+                </select>
+                Tháng
+                <select name="Month">
+
+                    @if (a.customerModel.DateOfBirth != null)
+                    {
+                        for (int i = 1; i <= 12; i++)
+                        {
+                            if (i != a.customerModel.DateOfBirth.Value.Month)
+                            {
+                                <option value="@i">@i</option>
+
+                            }
+                            else
+                            {
+                                <option selected="selected" value="@a.customerModel.DateOfBirth.Value.Month">@a.customerModel.DateOfBirth.Value.Month</option>
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 1; i <= 12; i++)
+                        {
+                             
+                                <option value="@i">@i</option>
+
+                             
+                        }
+                    }
+                </select>
+                Năm
+                <select name="Year">
+
+                    @if (a.customerModel.DateOfBirth != null)
+                    {
+                        for (int i = 1900; i <= int.Parse(DateTime.Now.ToString("yyyy")); i++)
+                        {
+                            if (i != a.customerModel.DateOfBirth.Value.Year)
+                            {
+                                <option value="@i">@i</option>
+
+                            }
+                            else
+                            {
+                                <option selected="selected" value="@a.customerModel.DateOfBirth.Value.Year">@a.customerModel.DateOfBirth.Value.Year</option>
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 1900; i <= int.Parse(DateTime.Now.ToString("yyyy")); i++)
+                        {
+
+                                <option value="@i">@i</option>
+
+                            
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                Số Điện Thoại
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Phone, new {@type="number", @class="form-control", @Value = a.customerModel.Phone })
+
+            </div>
+            <div class="col-md-4">
+                Địa chỉ
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @Value = a.customerModel.Address })
+
+                
+
+            </div>
+            <div>
+                <input type="submit" value="Lưu" style="padding: 10px; color: white; background: #ed2c2c; margin-left:100px" />
+            </div>
+        }
+
+    }
+
+</div>

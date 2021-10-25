@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FurnitureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PassWord" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="Byte" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Account" FromRole="Account" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="IdCart" />
+    </Key>
+    <Property Name="IdCart" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Cart_Customer" FromRole="Cart" ToRole="Customer" />
+    <NavigationProperty Name="DetailCarts" Relationship="Self.FK_DetailCart_Cart" FromRole="Cart" ToRole="DetailCart" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="IdCu" />
+    </Key>
+    <Property Name="IdCu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NameCu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Customer_Account" FromRole="Customer" ToRole="Account" />
+    <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_Customer" FromRole="Customer" ToRole="Cart" />
+    <NavigationProperty Name="TableComments" Relationship="Self.FK_TableComment_Customer" FromRole="Customer" ToRole="TableComment" />
+  </EntityType>
+  <EntityType Name="DesignFurniture">
+    <Key>
+      <PropertyRef Name="IdDe" />
+    </Key>
+    <Property Name="IdDe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NameProject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImageDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SubImgDesigns" Relationship="Self.FK_SubImgDesign_DesignFurniture" FromRole="DesignFurniture" ToRole="SubImgDesign" />
+  </EntityType>
+  <EntityType Name="DetailCart">
+    <Key>
+      <PropertyRef Name="IdDeCart" />
+    </Key>
+    <Property Name="IdDeCart" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCart" Type="Int32" />
+    <Property Name="IdGoods" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <Property Name="SumMoney" Type="Single" />
+    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ReadyBuy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK_DetailCart_Cart" FromRole="DetailCart" ToRole="Cart" />
+    <NavigationProperty Name="DetailOrders" Relationship="Self.FK_DetailOrder_DetailCart" FromRole="DetailCart" ToRole="DetailOrder" />
+  </EntityType>
+  <EntityType Name="DetailImportGood">
+    <Key>
+      <PropertyRef Name="IdDeIm" />
+    </Key>
+    <Property Name="IdDeIm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdIm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IdGoods" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="SumMoney" Type="Single" />
+    <NavigationProperty Name="ImportGood" Relationship="Self.FK_DetailImportGoods_ImportGoods" FromRole="DetailImportGoods" ToRole="ImportGoods" />
+  </EntityType>
+  <EntityType Name="DetailOrder">
+    <Key>
+      <PropertyRef Name="IdDeOrder" />
+    </Key>
+    <Property Name="IdDeOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDeCart" Type="Int32" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DetailCart" Relationship="Self.FK_DetailOrder_DetailCart" FromRole="DetailOrder" ToRole="DetailCart" />
+  </EntityType>
+  <EntityType Name="DisCount">
+    <Key>
+      <PropertyRef Name="IdDi" />
+    </Key>
+    <Property Name="IdDi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdGoods" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Price2" Type="Single" />
+    <NavigationProperty Name="Good" Relationship="Self.FK_DisCount_Goods" FromRole="DisCount" ToRole="Goods" />
+  </EntityType>
+  <EntityType Name="Good">
+    <Key>
+      <PropertyRef Name="IdGoods" />
+    </Key>
+    <Property Name="IdGoods" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdTypeG" Type="Int32" />
+    <Property Name="NameGoods" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Color" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Material" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Price" Type="Single" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Recommend" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DisCounts" Relationship="Self.FK_DisCount_Goods" FromRole="Goods" ToRole="DisCount" />
+    <NavigationProperty Name="ListTypeGood" Relationship="Self.FK_Goods_ListTypeGoods" FromRole="Goods" ToRole="ListTypeGoods" />
+    <NavigationProperty Name="SubImages" Relationship="Self.FK_SubImage_Goods" FromRole="Goods" ToRole="SubImage" />
+    <NavigationProperty Name="TableComments" Relationship="Self.FK_TableComment_Goods" FromRole="Goods" ToRole="TableComment" />
+  </EntityType>
+  <EntityType Name="ImportGood">
+    <Key>
+      <PropertyRef Name="IdIm" />
+    </Key>
+    <Property Name="IdIm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateCreate" Type="DateTime" Precision="0" />
+    <Property Name="IdSu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DetailImportGoods" Relationship="Self.FK_DetailImportGoods_ImportGoods" FromRole="ImportGoods" ToRole="DetailImportGoods" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_ImportGoods_Supplier" FromRole="ImportGoods" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="ListRequest">
+    <Key>
+      <PropertyRef Name="IdRe" />
+    </Key>
+    <Property Name="IdRe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateRe" Type="DateTime" Precision="3" />
+    <Property Name="NameCustomer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TypeProject" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Service" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ContentRequest" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ListTypeGood">
+    <Key>
+      <PropertyRef Name="IdTypeG" />
+    </Key>
+    <Property Name="IdTypeG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdRoom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NameTypeG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Goods" Relationship="Self.FK_Goods_ListTypeGoods" FromRole="ListTypeGoods" ToRole="Goods" />
+    <NavigationProperty Name="TypeGood" Relationship="Self.FK_ListTypeGoods_TypeGoods" FromRole="ListTypeGoods" ToRole="TypeGoods" />
+  </EntityType>
+  <EntityType Name="SubImgDesign">
+    <Key>
+      <PropertyRef Name="IdSub" />
+    </Key>
+    <Property Name="IdSub" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDe" Type="Int32" />
+    <Property Name="ImageSubDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DesignFurniture" Relationship="Self.FK_SubImgDesign_DesignFurniture" FromRole="SubImgDesign" ToRole="DesignFurniture" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="IdSu" />
+    </Key>
+    <Property Name="IdSu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NameSu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="ImportGoods" Relationship="Self.FK_ImportGoods_Supplier" FromRole="Supplier" ToRole="ImportGoods" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TableComment">
+    <Key>
+      <PropertyRef Name="IdCommnet" />
+    </Key>
+    <Property Name="IdCommnet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdGoods" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IdCu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Quality" Type="Byte" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_TableComment_Customer" FromRole="TableComment" ToRole="Customer" />
+    <NavigationProperty Name="Good" Relationship="Self.FK_TableComment_Goods" FromRole="TableComment" ToRole="Goods" />
+  </EntityType>
+  <EntityType Name="TypeGood">
+    <Key>
+      <PropertyRef Name="IdType" />
+    </Key>
+    <Property Name="IdType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NameType" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ListTypeGoods" Relationship="Self.FK_ListTypeGoods_TypeGoods" FromRole="TypeGoods" ToRole="ListTypeGoods" />
+  </EntityType>
+  <EntityType Name="SubImage">
+    <Key>
+      <PropertyRef Name="IdSubImage" />
+      <PropertyRef Name="IdGoods" />
+    </Key>
+    <Property Name="IdSubImage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdGoods" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SubImage1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Good" Relationship="Self.FK_SubImage_Goods" FromRole="SubImage" ToRole="Goods" />
+  </EntityType>
+  <Association Name="FK_Customer_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cart_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IdCu" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="IdCu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailCart_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+    <End Role="DetailCart" Type="Self.DetailCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="IdCart" />
+      </Principal>
+      <Dependent Role="DetailCart">
+        <PropertyRef Name="IdCart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TableComment_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="TableComment" Type="Self.TableComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IdCu" />
+      </Principal>
+      <Dependent Role="TableComment">
+        <PropertyRef Name="IdCu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubImgDesign_DesignFurniture">
+    <End Role="DesignFurniture" Type="Self.DesignFurniture" Multiplicity="0..1" />
+    <End Role="SubImgDesign" Type="Self.SubImgDesign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DesignFurniture">
+        <PropertyRef Name="IdDe" />
+      </Principal>
+      <Dependent Role="SubImgDesign">
+        <PropertyRef Name="IdDe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailOrder_DetailCart">
+    <End Role="DetailCart" Type="Self.DetailCart" Multiplicity="0..1" />
+    <End Role="DetailOrder" Type="Self.DetailOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetailCart">
+        <PropertyRef Name="IdDeCart" />
+      </Principal>
+      <Dependent Role="DetailOrder">
+        <PropertyRef Name="IdDeCart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailImportGoods_ImportGoods">
+    <End Role="ImportGoods" Type="Self.ImportGood" Multiplicity="0..1" />
+    <End Role="DetailImportGoods" Type="Self.DetailImportGood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ImportGoods">
+        <PropertyRef Name="IdIm" />
+      </Principal>
+      <Dependent Role="DetailImportGoods">
+        <PropertyRef Name="IdIm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DisCount_Goods">
+    <End Role="Goods" Type="Self.Good" Multiplicity="0..1" />
+    <End Role="DisCount" Type="Self.DisCount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="IdGoods" />
+      </Principal>
+      <Dependent Role="DisCount">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Goods_ListTypeGoods">
+    <End Role="ListTypeGoods" Type="Self.ListTypeGood" Multiplicity="0..1" />
+    <End Role="Goods" Type="Self.Good" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListTypeGoods">
+        <PropertyRef Name="IdTypeG" />
+      </Principal>
+      <Dependent Role="Goods">
+        <PropertyRef Name="IdTypeG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubImage_Goods">
+    <End Role="Goods" Type="Self.Good" Multiplicity="1" />
+    <End Role="SubImage" Type="Self.SubImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="IdGoods" />
+      </Principal>
+      <Dependent Role="SubImage">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TableComment_Goods">
+    <End Role="Goods" Type="Self.Good" Multiplicity="0..1" />
+    <End Role="TableComment" Type="Self.TableComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="IdGoods" />
+      </Principal>
+      <Dependent Role="TableComment">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ImportGoods_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="ImportGoods" Type="Self.ImportGood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="IdSu" />
+      </Principal>
+      <Dependent Role="ImportGoods">
+        <PropertyRef Name="IdSu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListTypeGoods_TypeGoods">
+    <End Role="TypeGoods" Type="Self.TypeGood" Multiplicity="0..1" />
+    <End Role="ListTypeGoods" Type="Self.ListTypeGood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeGoods">
+        <PropertyRef Name="IdType" />
+      </Principal>
+      <Dependent Role="ListTypeGoods">
+        <PropertyRef Name="IdRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FurnitureEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Carts" EntityType="Self.Cart" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="DesignFurnitures" EntityType="Self.DesignFurniture" />
+    <EntitySet Name="DetailCarts" EntityType="Self.DetailCart" />
+    <EntitySet Name="DetailImportGoods" EntityType="Self.DetailImportGood" />
+    <EntitySet Name="DetailOrders" EntityType="Self.DetailOrder" />
+    <EntitySet Name="DisCounts" EntityType="Self.DisCount" />
+    <EntitySet Name="Goods" EntityType="Self.Good" />
+    <EntitySet Name="ImportGoods" EntityType="Self.ImportGood" />
+    <EntitySet Name="ListRequests" EntityType="Self.ListRequest" />
+    <EntitySet Name="ListTypeGoods" EntityType="Self.ListTypeGood" />
+    <EntitySet Name="SubImgDesigns" EntityType="Self.SubImgDesign" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TableComments" EntityType="Self.TableComment" />
+    <EntitySet Name="TypeGoods" EntityType="Self.TypeGood" />
+    <EntitySet Name="SubImages" EntityType="Self.SubImage" />
+    <AssociationSet Name="FK_Customer_Account" Association="Self.FK_Customer_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cart_Customer" Association="Self.FK_Cart_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailCart_Cart" Association="Self.FK_DetailCart_Cart">
+      <End Role="Cart" EntitySet="Carts" />
+      <End Role="DetailCart" EntitySet="DetailCarts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TableComment_Customer" Association="Self.FK_TableComment_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="TableComment" EntitySet="TableComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubImgDesign_DesignFurniture" Association="Self.FK_SubImgDesign_DesignFurniture">
+      <End Role="DesignFurniture" EntitySet="DesignFurnitures" />
+      <End Role="SubImgDesign" EntitySet="SubImgDesigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailOrder_DetailCart" Association="Self.FK_DetailOrder_DetailCart">
+      <End Role="DetailCart" EntitySet="DetailCarts" />
+      <End Role="DetailOrder" EntitySet="DetailOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailImportGoods_ImportGoods" Association="Self.FK_DetailImportGoods_ImportGoods">
+      <End Role="ImportGoods" EntitySet="ImportGoods" />
+      <End Role="DetailImportGoods" EntitySet="DetailImportGoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DisCount_Goods" Association="Self.FK_DisCount_Goods">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="DisCount" EntitySet="DisCounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Goods_ListTypeGoods" Association="Self.FK_Goods_ListTypeGoods">
+      <End Role="ListTypeGoods" EntitySet="ListTypeGoods" />
+      <End Role="Goods" EntitySet="Goods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubImage_Goods" Association="Self.FK_SubImage_Goods">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="SubImage" EntitySet="SubImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TableComment_Goods" Association="Self.FK_TableComment_Goods">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="TableComment" EntitySet="TableComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ImportGoods_Supplier" Association="Self.FK_ImportGoods_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="ImportGoods" EntitySet="ImportGoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListTypeGoods_TypeGoods" Association="Self.FK_ListTypeGoods_TypeGoods">
+      <End Role="TypeGoods" EntitySet="TypeGoods" />
+      <End Role="ListTypeGoods" EntitySet="ListTypeGoods" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

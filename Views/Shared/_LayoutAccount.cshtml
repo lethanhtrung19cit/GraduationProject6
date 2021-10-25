@@ -1,0 +1,29 @@
+﻿ @{
+     Layout = "~/Views/Shared/_Layout.cshtml";
+ }
+<div class="row">
+    <div class="col-md-3">
+        
+        <h2>@Session["NameCu"].ToString()</h2>
+        <hr />
+        <div>
+            <a style="font-size: 18px; color: #2177b3" href="@Url.Action("Information", "Account")">
+                <i class="fa fa-user"></i>
+                Thông tin cá nhân
+            </a>
+        </div>
+        <div style="margin: 15px 0;">
+            <a style="font-size: 18px; color: #2177b3" href="@Url.Action("changePassWordView", "Account")">
+                <i class="fa fa-key"></i>
+                Đổi mật khẩu
+            </a>
+        </div>
+        
+         
+    </div>
+    <div class="col-md-8">
+        @RenderBody()
+    </div>
+</div>
+
+ 

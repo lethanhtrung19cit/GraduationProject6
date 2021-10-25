@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listEsGoods = (List<GraduationProject.Models.GoodsModel>)ViewBag.EsGoods;
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+ 
+<div>
+    <div id="home" class="carousel slide" data-ride="carousel" style="margin-right:5px">
+        <ol class="carousel-indicators">
+            <li data-target="#home" data-slide-to="0" class="active"></li>
+            <li data-target="#home" data-slide-to="1"></li>
+            <li data-target="#home" data-slide-to="2"></li>
+            <li data-target="#home" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+
+            <div class="item active">
+
+                <div class="container" style="position:relative">
+                    <a href="#"> <img style="width: 100%; height:100%;" src="~/images/03.jpg" /></a>
+                    <div class="overlay2">
+                        <div class="text2" style="color: white; font-size: 20px; padding: 50% 20px 50% 20px; font-family: 'Big Shoulders Display', cursive;">
+
+                            <h1 class="" style="">Đồ nội thất Sơn Việt</h1>
+                            <p class="lead my-3">Sale 40%</p>
+                            <p> Nhân dịp ngày Nhà Giáo Việt Nam 20-11, Nội thất Unique Decor giảm giá 20% các loại mặt hàng</p>
+                            <p class="lead mb-0"><a style="color:white" href="@Url.Action("DisCount", "Goods")" class="text-white font-weight-bold">Xem Ngay</a></p>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="item">
+                <a href="#"><img style="width: 100%" data-src="slides/2021/cdoan.jpg" src="~/images/banner.jpg"></a>
+            </div>
+            <div class="item">
+                <a href="#"><img style="width: 100%" data-src="slides/2021/cita2021_.jpg" src="~/images/Tờ rơi giới thiệu dịch vụ thiết kế nội thất.jpg"></a>
+            </div>
+            <div class="item">
+                <a href="#"><img style="width: 100%" data-src="slides/2021/tuanledoanhnghiep.jpg" src="~/images/phong-cach-noi-that-hien-dai.jpg"></a>
+            </div>
+
+        </div>
+        <a style="width:100px" class="left carousel-control" href="#home" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a style="width:100px" class="right carousel-control" href="#home" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+
+    <div style="margin-top:20px">
+        <div>
+            <h2 style="color:#ff0000">Sản Phẩm Mới Nhất</h2>
+            <hr />
+        </div>
+
+    </div>
+    <div style="background: #bfbbbb; width:1190px">
+
+        <div style="height:440px">
+            <span style="float: left; margin-left: 0px; margin-top: 200px;">
+
+                <button onclick="leftclick()" id="right">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </button>
+            </span>
+            <span style="float:left; width:1080px">
+                <div class="scrollmenu" id="living">
+                    @foreach (var a in listEsGoods)
+                    {
+                    
+                        var url = "/chi-tiet-san-pham/" + a.goodsModel.NameGoods + "-" + a.goodsModel.IdGoods;
+                        <a style="text-decoration:none" href="@url">
+
+                            <img src="@a.goodsModel.Image" width="450px" height="300px" />
+                            <div><h4>@a.goodsModel.NameGoods</h4></div>
+
+                            <h3 style="color:red; text-align:center">@a.goodsModel.Price.ToString("#,###", info) VNĐ </h3>
+                        </a>
+
+                    }
+
+
+                </div>
+            </span>
+            <span style="float: right; margin-left: -10px; margin-top: 200px;">
+
+                <button onclick="rightclick()" id="right">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            </span>
+
+            @*<img src="~/images/noi-that-hien-dai-600x395.jpg" width="400px" height="300px" />
+                <img style="margin-left:20px" src="~/images/noi-that-hien-dai-600x395.jpg" width="400px" height="300px" />
+                <img style="margin-left:20px" src="~/images/noi-that-hien-dai-600x395.jpg" width="400px" height="300px" />*@
+
+
+        </div>
+    </div>
+    <div style="margin-top:20px">
+        <div>
+            <h2 style="color:#ff0000">Các Mẫu Thiết Kế</h2>
+            <hr />
+        </div>
+
+        <div id="exampledesign" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#exampledesign" data-slide-to="0" class="active"></li>
+                <li data-target="#exampledesign" data-slide-to="1"></li>
+                <li data-target="#exampledesign" data-slide-to="2"></li>
+                <li data-target="#exampledesign" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <a href="#">
+                        <img style="width: 1300px; height:700px" data-src="slides/2021/ck-robocar2021.jpg" src="~/images/phongkhach.jpg">
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h3 style="color:white; margin-left:310px"> Phòng khách</h3>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <img style="width: 1300px; height: 700px" src="~/images/phonglamviec.jpg">
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h3 style="color: white; margin-left: 310px"> Phòng làm việc</h3>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <img style="width: 1300px; height: 700px" src="~/images/phongan.jpg">
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h3 style="color: white; margin-left: 310px"> Phòng ăn</h3>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <img style="width: 1300px; height: 700px" src="~/images/phongngu.jpg">
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h3 style="color: white; margin-left: 310px"> Phòng ngủ</h3>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+
+
+
+
+            </div>
+            <a class="left carousel-control" href="#exampledesign" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#exampledesign" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+     
+    function leftclick() {
+        event.preventDefault();
+        $('#living').animate({
+            scrollLeft: "-=400px"
+        }, "slow");
+    }
+    function rightclick() {
+        event.preventDefault();
+        $('#living').animate({
+            scrollLeft: "+=400px"
+        }, "slow");
+    }
+</script>

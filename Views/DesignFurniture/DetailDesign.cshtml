@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "DetailDesign";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var SubImageDesign = (List<GraduationProject.Models.GoodsModel>)ViewBag.SubImageDesign;
+    var listRefe = (List<GraduationProject.Models.EF.DesignFurniture>)ViewBag.listRefe;
+
+}
+
+@foreach (var a in SubImageDesign)
+{
+    <div>
+        <img id="imagede" src="@a.designFurnitureModel.ImageDe" style="height:500px; width:1290px" />
+    </div>
+    break;
+}
+<div>
+    <div style="height: 200px; background: #383030">
+        <span style="float: left; margin-left: 0px; margin-top: 60px;">
+
+            <button onclick="leftclick()" id="right">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </button>
+        </span>
+        <span style="float:left; width:1103px">
+            <div class="scrollmenu" id="living">
+                @foreach (var a in SubImageDesign)
+                {
+                    <img data-id="@a.designFurnitureModel.ImageDe" style="cursor:pointer" class="imgsub" src="@a.designFurnitureModel.ImageDe" width="200px" height="150px" />
+                    break;
+                }
+                @foreach (var a in SubImageDesign)
+                {
+                    <img data-id="@a.subImgModel.ImageSubDe" style="cursor:pointer" class="imgsub" src="@a.subImgModel.ImageSubDe" width="200px" height="150px" />
+
+                }
+
+            </div>
+        </span>
+        <span style="float: right; margin-left: -10px; margin-top: 60px;">
+
+            <button onclick="rightclick()" id="right">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
+        </span>
+    </div>
+
+    <div style="font-size: 18px; background: #383030; color: white; padding: 0 0 30px 40px">
+
+        @foreach (var a in SubImageDesign)
+        {
+            <p style="font-size:30px">@a.designFurnitureModel.NameDe</p>
+            <p>Dự án: @a.designFurnitureModel.NameProject</p>
+            if (a.designFurnitureModel.Area != "")
+            {
+                <p> Diện tích : @a.designFurnitureModel.Area </p>
+            }
+            if (a.designFurnitureModel.Address != "")
+            {
+                <p> Địa chỉ :  @a.designFurnitureModel.Address </p>
+            }
+            <p>@a.designFurnitureModel.Content</p>
+
+            break;
+        }
+    </div>
+    <div class="row">
+        <div>
+            <h2 style="color:red">Một số mẫu thiết kế liên quan</h2>
+        </div>
+        <div style="margin-left:-10px">
+            @foreach (var a in listRefe)
+            {
+                <div class="col-md-6">
+                    <a style="text-decoration:none" href="@Url.Action("DetailDesign", "DesignFurniture", new { id=a.IdDe})">
+                        <img src="@a.ImageDe" />
+                        <h3>@a.NameDe</h3>
+                    </a>
+
+                </div>
+
+            }
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $(".imgsub").click(function () {
+        var image = $(this).attr("data-id");
+         document.getElementById("imagede").src =  image;
+    });
+    function leftclick() {
+        event.preventDefault();
+        $('#living').animate({
+            scrollLeft: "-=400px"
+        }, "slow");
+    }
+    function rightclick() {
+        event.preventDefault();
+        $('#living').animate({
+            scrollLeft: "+=400px"
+        }, "slow");
+    }
+</script>

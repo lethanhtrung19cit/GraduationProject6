@@ -1,0 +1,308 @@
+﻿
+@{
+    ViewBag.Title = "Đơn hàng của tôi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listOrder = (List<GraduationProject.Models.GoodsModel>)ViewBag.listOrderAll;
+    var listPending = (List<GraduationProject.Models.GoodsModel>)ViewBag.listOrderPending;
+    var listDelivering = (List<GraduationProject.Models.GoodsModel>)ViewBag.listOrderDelivering;
+    var listDelivered = (List<GraduationProject.Models.GoodsModel>)ViewBag.listOrderDelivered;
+    var listCancelled = (List<GraduationProject.Models.GoodsModel>)ViewBag.listOrderCancelled;
+    var myComment = (List<string>)ViewBag.myComment;
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    float sumPending = 0;
+    float sumDelivering = 0;
+    float sumDelivered = 0;
+    float sumCancelled = 0;
+    string Status;
+}
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 0 20px;
+        width: 1174px;
+    }
+</style>
+<h2>Đơn hàng của tôi</h2>
+
+    <div class="tabs">
+        <div class="tab-nav-wrapper">
+            <ul>
+                <li class="active"><a href="#tab1">Tất cả</a></li>
+                <li><a href="#tab2">Chờ xác nhận</a></li>
+                <li><a href="#tab3">Đang giao</a></li>
+                <li><a href="#tab4">Đã giao</a></li>
+                <li><a href="#tab5">Đã hủy</a></li>
+
+            </ul>
+        </div>
+
+        <div class="tab-content-wrapper" style="width: 1200px">
+            <div id="tab1" class="tab-content" style="display:none">
+                @if (listOrder.Count < 1)
+                {
+                    <div>Không có đơn hàng nào</div>
+                }
+                else
+                {
+                    <table>
+                        <tr style="font-size:20px">
+                            <th>Mã hàng</th>
+                            <th>Tên hàng</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                        </tr>
+
+                        @foreach (var a in listOrder)
+                        {
+
+                             float sum = a.detailCartModel.Amount * a.goodsModel.Price;
+                            if (a.detailCartModel.Status == "1")
+                            {
+                                Status = "Đang chờ xác nhận";
+                            }
+                            else if (a.detailCartModel.Status == "2")
+                            {
+                                Status = "Đang vận chuyển";
+                            }
+                            else if (a.detailCartModel.Status == "3")
+                            {
+                                Status = "Đã giao hàng";
+                            }
+                            else
+                            {
+                                Status = "Đã hủy";
+                            }
+                            <tr>
+                                <td>@a.detailCartModel.IdDeCart</td>
+                                <td>@a.goodsModel.NameGoods</td>
+                                <td>
+                                   
+                                    @a.goodsModel.Price.ToString("#,###", info) VND
+                                </td>
+                                <td>@a.detailCartModel.Amount</td>
+                                <td style="color:red">@sum.ToString("#,###", info) VNĐ</td>
+
+                                <td>@Status</td>
+                            </tr>
+                             
+
+
+                        }
+                    </table>
+
+                   
+                }
+            </div>
+
+            <div id="tab2" class="tab-content" style="display:none">
+                @if (listPending.Count < 1)
+                {
+                    <div>Không có đơn hàng nào</div>
+                }
+                else
+                {
+                    <table>
+                        <tr style="font-size:20px">
+                            <th>Mã hàng</th>
+                            <th>Tên hàng</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+
+                        </tr>
+
+                        @foreach (var a in listPending)
+                        {
+
+                            float sum = a.detailCartModel.Amount * a.goodsModel.Price;
+
+                            <tr>
+                                <td>@a.detailCartModel.IdDeCart</td>
+                                <td>@a.goodsModel.NameGoods</td>
+                                <td>@a.goodsModel.Price.ToString("#,###", info) VNĐ</td>
+                                <td>@a.detailCartModel.Amount</td>
+                                <td style="color:red">@sum.ToString("#,###", info) VNĐ</td>
+
+
+                            </tr>
+                            sumPending += sum;
+
+
+                        }
+                    </table>
+
+                    sumPending += 50000;
+
+                    <div style="margin-top:30px">
+                        Tổng thanh toán :
+                        <h3 style="color:red">@sumPending.ToString("0") VND</h3>
+                    </div>
+                }
+
+            </div>
+            <div id="tab3" class="tab-content" style="display:none">
+                @if (listDelivering.Count < 1)
+                {
+                    <div>Không có đơn hàng nào</div>
+                }
+                else
+                {
+                    <table>
+                        <tr style="font-size:20px">
+                            <th>Mã hàng</th>
+                            <th>Tên hàng</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+
+                        </tr>
+
+                        @foreach (var a in listDelivering)
+                        {
+
+                            float sum = a.detailCartModel.Amount * a.goodsModel.Price;
+
+                            <tr>
+                                <td>@a.detailCartModel.IdDeCart</td>
+                                <td>@a.goodsModel.NameGoods</td>
+                                <td>@a.goodsModel.Price.ToString("#,###", info) VNĐ</td>
+                                <td>@a.detailCartModel.Amount</td>
+                                <td style="color:red">@sum.ToString("#,###", info) VNĐ</td>
+
+
+                            </tr>
+                            sumDelivering += sum;
+
+
+                        }
+                    </table>
+
+                    sumDelivering += 50000;
+
+                    <div style="margin-top:30px">
+                        Tổng thanh toán :
+                        <h3 style="color:red">@sumDelivering.ToString("0") VND</h3>
+                    </div>
+                }
+
+            </div>
+            <div id="tab4" class="tab-content" style="display:none">
+                @if (listDelivered.Count < 1)
+                {
+                    <div>Không có đơn hàng nào</div>
+                }
+                else
+                {
+                    <table>
+                        <tr style="font-size:20px">
+                            <th>Mã hàng</th>
+                            <th>Tên hàng</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var a in listDelivered)
+                        {
+
+                            float sum = a.detailCartModel.Amount * a.goodsModel.Price;
+                            int d = 0;
+                    <tr>
+                        <td>@a.detailCartModel.IdDeCart</td>
+                        <td>@a.goodsModel.NameGoods</td>
+                        <td>@a.goodsModel.Price.ToString("#,###", info) VNĐ</td>
+                        <td>@a.detailCartModel.Amount</td>
+                        <td style="color:red">@sum.ToString("#,###", info) VNĐ</td>
+                        @foreach (var item in myComment)
+                        {
+                            if (item == a.detailCartModel.IdGoods)
+                            {
+                                break;
+                            }
+                            else { d++; }
+
+
+                        }
+                        @if (d == myComment.Count)
+                        {
+                            <td><a href="@Url.Action("addCommentView", "Goods", new { IdGoods = a.goodsModel.IdGoods, IdCu = Session["IdCu"].ToString() })" style="padding: 10px 10px; background: red; color: white; font-size: 17px; text-decoration:none">Thêm đánh giá</a></td>
+
+                        }
+
+                    </tr>
+                            sumDelivered += sum;
+
+
+                        }
+                    </table>
+
+                    sumDelivered += 50000;
+
+                    <div style="margin-top:30px">
+                        Tổng thanh toán :
+                        <h3 style="color:red">@sumDelivered.ToString("0") VND</h3>
+                    </div>
+                }
+
+            </div>
+            <div id="tab5" class="tab-content" style="display:none">
+                @if (listCancelled.Count < 1)
+                {
+                    <div>Không có đơn hàng nào</div>
+                }
+                else
+                {
+                    <table>
+                        <tr style="font-size:20px">
+                            <th>Mã hàng</th>
+                            <th>Tên hàng</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+
+                        </tr>
+
+                        @foreach (var a in listCancelled)
+                        {
+
+                            float sum = a.detailCartModel.Amount * a.goodsModel.Price;
+
+                            <tr>
+                                <td>@a.detailCartModel.IdDeCart</td>
+                                <td>@a.goodsModel.NameGoods</td>
+                                <td>@a.goodsModel.Price.ToString("#,###", info) VNĐ</td>
+                                <td>@a.detailCartModel.Amount</td>
+                                <td style="color:red">@sum.ToString("#,###", info) VNĐ</td>
+
+
+                            </tr>
+                            sumCancelled += sum;
+
+
+                        }
+                    </table>
+
+                    sumCancelled += 50000;
+
+                    <div style="margin-top:30px">
+                        Tổng thanh toán :
+                        <h3 style="color:red">@sumCancelled.ToString("0") VND</h3>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    
+<script>
+    function addComment(IdTable) {
+
+    }
+</script>
+
+    
+ 
+

@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "DetailGoods";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var detailGoods = (List<GraduationProject.Models.EF.Good>)ViewBag.DetailGoods;
+    var subImageGoods = (List<GraduationProject.Models.GoodsModel>)ViewBag.SubImageGoods;
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    var listCommentProduct = (List<GraduationProject.Models.GoodsModel>)ViewBag.listCommentProduct;
+    var qualityCus = (List<GraduationProject.Models.EF.TableComment>)ViewBag.qualityCus;
+}
+
+@foreach (var a in detailGoods)
+{
+    <div class="row">
+        <div class="col-md-5" style="margin-left: -15px;">
+            <div id="imageGoods" class="img" style="background:url(@a.Image); background-size:contain; width: 490px;height: 330px;">
+
+            </div>
+            <div style="margin-top:20px">
+                <ul id="good">
+                    @foreach (var de in subImageGoods)
+                    {
+
+                        <li style="display:inline-block" data-id="@de.goodsModel.Image"><img src="@de.goodsModel.Image" width="100px" ; height="100px" /></li>
+                        break;
+                    }
+                    @foreach (var de in subImageGoods)
+                    {
+
+                        <li style="display:inline-block" data-id="@de.subGoodsModel.SubImage1"><img src="@de.subGoodsModel.SubImage1" width="100px" ; height="100px" /></li>
+
+                    }
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-5" style="font-size:17px; margin-left:100px">
+            <h2 style="color:red">@a.NameGoods</h2>
+            <h3 style="color:red">@a.Price.ToString("#,###", info) VNĐ</h3>
+            <div>
+                <b>Kích thước:</b> @a.Size
+            </div>
+            <div style="margin-top:20px">
+                <b>Vật liệu:</b>
+            </div>
+            <div>
+                @a.Material
+            </div>
+            <div style="margin-top:20px">
+                <b>Màu sắc:</b>  @a.Color
+            </div>
+            <div style="margin-top:20px">
+                <b>Số lượng:</b>
+                <input style="padding: 6px 15px;" onclick="decrease()" type="button" value="-" />
+                <input style="width:50px; padding:7px" id="count" type="text" value="1" />
+                <input style="padding: 6px 15px;" onclick="increase()" type="button" value="+" />
+            </div>
+            <div style="margin-top:30px">
+                <input onclick="addCart('@a.IdGoods')" style="background: #e53d3d; color:white; font-weight:bold; margin-right:30px" type="button" value="Thêm vào giỏ hàng" />
+                <input style="background: #e53d3d; color:white; font-weight:bold" type="button" value="Mua ngay" />
+            </div>
+            <div id="notify" style="display:none; color:red">
+                Thêm vào giỏ hàng thành công
+            </div>
+        </div>
+    </div>
+    <div style="margin:0 0 50px -30px">
+        <h3>MÔ TẢ SẢN PHẨM</h3> <br />
+        @a.Recommend
+    </div>
+    <div style="margin:0 0 0px -30px; font-size:18px">
+        <h3>ĐÁNH GIÁ CHẤT LƯỢNG</h3> <br />
+        @foreach (var item in listCommentProduct)
+        { 
+            <div>
+                <b>@item.customerModel.NameCu</b> 
+            </div>
+            <div>
+                @item.tableCommentModel.Time
+            </div>
+            <div>
+                 @foreach (var q in qualityCus)
+                    {
+                        <div>
+
+                            @for (int i = 0; i < q.Quality; i++)
+                            {
+                                <i style="color: #b9b94f" class="fa fa-star"></i>
+                            }
+                        </div>
+                        <div>
+                            @q.Comment
+                        </div>
+                    }
+               
+            </div>
+             
+        }
+    </div>
+}
+<script>
+    function addCart(IdGoods) {
+        document.getElementById("notify").style.display = "block";
+         
+
+         var Amount = $('#count').val();
+        $.ajax({
+            type: "POST",
+            url: "/Cart/addCart/",
+            data: { IdGoods: IdGoods, Amount: Amount },
+
+            dataType: "json",
+            success: function () {
+                
+            }
+
+        });
+    }
+    function increase() {
+        var number = $('#count').val();
+
+        var number1 = Number(number) + 1;
+
+        $('#count').val(number1);
+        
+    }
+    function decrease() {
+        var number = $('#count').val();
+
+        var number1 = Number(number) - 1;
+        if (number1 == 0) {
+            $('#count').val(1);
+        }
+        else {
+            $('#count').val(number1);
+        }
+    }
+    $("#good li").hover(function () {
+        var image = $(this).attr("data-id");
+        document.getElementById("imageGoods").style.backgroundImage = "url('" + image + "')"
+    });
+</script>

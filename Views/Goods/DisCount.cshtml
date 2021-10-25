@@ -1,0 +1,201 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listDisCountLR = (List<GraduationProject.Models.GoodsModel>)ViewBag.listDisCountLR;
+    var listDisCountDR = (List<GraduationProject.Models.GoodsModel>)ViewBag.listDisCountDR;
+    var listDisCountWR = (List<GraduationProject.Models.GoodsModel>)ViewBag.listDisCountWR;
+    var listDisCountBR = (List<GraduationProject.Models.GoodsModel>)ViewBag.listDisCountBR;
+
+}
+
+<div style="margin-left:-30px">
+    @if (listDisCountLR.Count > 0)
+    {
+        <div>
+            <h2 style="font-weight:bold">Nội thất phòng khách</h2>
+            <hr />
+        </div>
+        <div class="scrollmenu" id="living">
+            @foreach (var a in listDisCountLR)
+            {
+
+                <a href="#home">
+                    <span style="float:left">
+                        <a style="text-decoration:none" href="#">
+                            <img src="@a.goodsModel.Image" width="300px" height="250px" />
+                            <div><h4>@a.goodsModel.NameGoods</h4></div>
+
+                            <h3 style="color:red; text-align:center">@a.goodsModel.Price.ToString("0") VNĐ </h3>
+                        </a>
+                    </span>
+                </a>
+            }
+            @if (listDisCountLR.Count > 3)
+            {
+                <button onclick="leftclick()" id="left" style="width: 45px; height: 50px; position: absolute; top: 450px; left: 5.2%;">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </button>
+                <button onclick="rightclick()" id="right" style="width: 45px; height: 50px; position: absolute; top: 450px; left:89.5%">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            }
+        </div>
+
+    }
+
+    @if (listDisCountWR.Count > 0)
+    {
+        <div>
+            <h2 style="font-weight:bold">Nội thất phòng làm việc</h2>
+            <hr />
+        </div>
+        <div class="scrollmenu" id="Work">
+            @foreach (var a in listDisCountWR)
+            {
+
+                <a href="#home">
+                    <span style="float:left">
+                        <a style="text-decoration:none" href="#">
+                            <img src="@a.goodsModel.Image" width="300px" height="250px" />
+                            <div><h4>@a.goodsModel.NameGoods</h4></div>
+
+                            <h3 style="color:red; text-align:center">@a.goodsModel.Price.ToString("0") VNĐ </h3>
+                        </a>
+                    </span>
+                </a>
+            }
+            @if (listDisCountWR.Count > 3)
+            {
+                <button onclick="leftClickWork()" id="leftWork" style="width: 45px; height: 50px; position: absolute; top: 950px; left: 5.2%;">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </button>
+                <button onclick="rightClickWork()" id="rightWork" style="width: 45px; height: 50px; position: absolute; top: 950px; left:89.5%">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            }
+        </div>
+
+    }
+
+    @if (listDisCountDR.Count > 0)
+    {
+        <div>
+            <h2 style="font-weight:bold">Nội thất phòng ăn</h2>
+            <hr />
+        </div>
+        <div class="scrollmenu" id="Dinning">
+            @foreach (var a in listDisCountDR)
+            {
+
+                <a href="#home">
+                    <span style="float:left">
+                        <a style="text-decoration:none" href="#">
+                            <img src="@a.goodsModel.Image" width="300px" height="250px" />
+                            <div><h4>@a.goodsModel.NameGoods</h4></div>
+
+                            <h3 style="color:red; text-align:center">@a.goodsModel.Price.ToString("0") VNĐ </h3>
+                        </a>
+                    </span>
+                </a>
+            }
+            @if (listDisCountDR.Count > 3)
+            {
+                <button onclick="leftClickDinning()" id="leftDinning" style="width: 45px; height: 50px; position: absolute; top: 1400px; left: 5.2%;">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </button>
+                <button onclick="rightClickDinning()" id="rightDinning" style="width: 45px; height: 50px; position: absolute; top: 1400px; left:89.5%">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            }
+
+        </div>
+
+    }
+
+    @if (listDisCountBR.Count > 0)
+    {
+        <div>
+            <h2 style="font-weight:bold">Nội thất phòng ngủ</h2>
+            <hr />
+        </div>
+        <div class="scrollmenu" id="Bed">
+            @foreach (var a in listDisCountBR)
+            {
+
+                <a href="#home">
+                    <span style="float:left">
+                        <a style="text-decoration:none" href="#">
+                            <img src="@a.goodsModel.Image" width="300px" height="250px" />
+                            <div><h4>@a.goodsModel.NameGoods</h4></div>
+
+                            <h3 style="color:red; text-align:center">@a.goodsModel.Price.ToString("0") VNĐ </h3>
+                        </a>
+                    </span>
+                </a>
+            }
+            @if (listDisCountBR.Count > 3)
+            {
+                <button onclick="leftClickBed()" id="leftBed" style="width: 45px; height: 50px; position: absolute; top: 1850px; left: 5.2%;">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </button>
+                <button onclick="rightClickBed()" id="rightBed" style="width: 45px; height: 50px; position: absolute; top: 1850px; left:89.5%">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            }
+        </div>
+
+    }
+</div>
+
+<script>
+        function leftClickWork() {
+            event.preventDefault();
+            $('#Work').animate({
+                scrollLeft: "-=400px"
+            }, "slow");
+        }
+        function rightClickWork() {
+            event.preventDefault();
+            $('#Work').animate({
+                scrollLeft: "+=400px"
+            }, "slow");
+
+        }
+        function leftclick() {
+            event.preventDefault();
+            $('#living').animate({
+                scrollLeft: "-=400px"
+            }, "slow");
+        }
+        function rightclick() {
+            event.preventDefault();
+            $('#living').animate({
+                scrollLeft: "+=400px"
+            }, "slow");
+        }
+        function leftclickDinning() {
+            event.preventDefault();
+            $('#Dinning').animate({
+                scrollLeft: "-=400px"
+            }, "slow");
+        }
+        function rightclickDinning() {
+            event.preventDefault();
+            $('#Dinning').animate({
+                scrollLeft: "+=400px"
+            }, "slow");
+        }
+        function leftclickBed() {
+            event.preventDefault();
+            $('#Bed').animate({
+                scrollLeft: "-=400px"
+            }, "slow");
+        }
+        function rightclickBed() {
+            event.preventDefault();
+            $('#Bed').animate({
+                scrollLeft: "+=400px"
+            }, "slow");
+        }
+</script>

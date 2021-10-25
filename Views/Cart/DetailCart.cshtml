@@ -1,0 +1,213 @@
+﻿
+@{
+    ViewBag.Title = "DetailCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var detailCart = (List<GraduationProject.Models.GoodsModel>)ViewBag.detailCart;
+    int a1 = 1;
+    int checkBox = 1;
+    float sumPrice1 = 0;
+    int stt=0;
+}
+<style>
+    table {
+        border-collapse: separate;
+         border-spacing: 0 50px;
+     }
+
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 1200px;
+    }
+
+        .sticky  {
+            padding: 10px;
+        }   
+</style>
+<div>
+    <div id="sumMoney" style="font-size:18px ;z-index: 2; background: yellow; padding: 20px 0 5px 0;">
+        <div class="row">
+            <div class="col-md-5">
+                <button style="background:yellow" onclick="selectAll()">Chọn tất cả</button>
+                
+            </div>
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-5" style="width:650px">
+
+                Tổng thanh toán:(<label id="amount">0</label>Sản phẩm)
+                <label style="color:red" id="sumprice">0</label>VNĐ
+                <a href="@Url.Action("listReady", "Cart")" style="text-decoration:none;padding:10px; color:white; font-weight:bold; background:red">Mua hàng</a>
+            </div>
+        </div>
+    </div>
+    <table style="width:1185px">
+         
+        <tr style="font-size:20px">
+            <th><input type="checkbox" onclick="selectAll()"/></th>
+            <th>Sản phẩm</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Số tiền</th>
+            <th>Thao tác</th>
+        </tr>
+        
+        @foreach (var a in detailCart)
+        {
+
+            string a2 ="sumP"+ a1.ToString();
+            string row = "row" + @a.detailCartModel.IdDeCart;
+            float sumPrice = a.goodsModel.Price * a.detailCartModel.Amount;
+            string checkBox1 = "stt" + checkBox;
+            <tr id="@row">
+                <td><input style="height:30px; width: 30px" id="@checkBox1" onclick="sumMoney('@checkBox1', @sumPrice, '@a.detailCartModel.IdDeCart')" type="checkbox"/></td>
+                <td style="font-size:17px"><img src="@a.goodsModel.Image" style=" width: 200px; height: 150px; border: solid 2px #996565;"/> @a.goodsModel.NameGoods</td>
+                <td>@a.goodsModel.Price.ToString("0") VND</td>
+                <td>
+                    <input style="padding: 6px 15px;" onclick="decrease('@a.detailCartModel.IdGoods','@a2', @a.goodsModel.Price)" type="button" value="-" />
+                    <input style="width:50px; padding:7px" id="@a.detailCartModel.IdGoods" type="text" value="@a.detailCartModel.Amount" />
+                    <input style="padding: 6px 15px;" onclick="increase('@a.detailCartModel.IdGoods','@a2', @a.goodsModel.Price)" type="button" value="+" /> 
+                </td>
+                <td data-id="@sumPrice.ToString("0")" style="color: #fb471e; font-weight:bold" id="@a2">@sumPrice.ToString("0") VND</td>
+                <td>
+                    <input onclick="deleteCart('@a.detailCartModel.IdDeCart')" class="btn btn-primary" type="button" value="Xóa">
+                </td>
+            </tr>
+            a1++;
+            checkBox++;
+            sumPrice1 += sumPrice;
+            stt++;
+        }
+         
+        </table>
+
+        </div>
+<input id="sum" type="hidden" value="@sumPrice1.ToString("0")"/>
+<input id="stt" type="hidden" value="@stt"/>
+<script>
+    
+    window.onscroll = function () { myFunction() };
+    var navbar = document.getElementById("sumMoney");
+    var sticky = navbar.offsetTop;
+    
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+    function selectAll() {
+ 
+        $("input[type='checkbox']").prop('checked', true);
+        $('#sumprice').text($('#sum').val());
+        $('#amount').text($('#stt').val());
+        $.ajax({
+            type: "POST",
+            url: "/Cart/addAllReady/",
+             dataType: "json",
+            success: function () {
+
+            }
+
+        });
+    }
+
+    function sumMoney(checkBox, Price, IdDeCart) {
+        if ($('#' + checkBox).is(':checked') == true) {
+            var sum = $('#sumprice').text();
+            sum =parseInt(sum)+ parseFloat(Price);
+            $('#sumprice').text(sum);
+            var amount = $('#amount').text();
+            amount++;
+            $('#amount').text(amount);
+            $.ajax({
+                type: "POST",
+                url: "/Cart/addReady/",
+                data: { IdDeCart: IdDeCart },
+                dataType: "json",
+                success: function () {
+
+                }
+
+            });
+        }
+        else {
+            var amount = $('#amount').text();
+            amount--;
+            $('#amount').text(amount);
+            var sum = $('#sumprice').text();
+            sum =sum - Price;
+            $('#sumprice').text(sum);
+            $.ajax({
+                type: "POST",
+                url: "/Cart/subReady/",
+                data: { IdDeCart: IdDeCart },
+                dataType: "json",
+                success: function () {
+
+                }
+
+            });
+        }
+    }
+    function deleteCart(sttRow) {
+        var row = $('#row' + sttRow);
+        row.remove();
+        $.ajax({
+            type: "POST",
+            url: "/Cart/deleteCart/",
+            data: { IdDeCart: sttRow },
+            dataType: "json",
+            success: function () {
+
+            }
+
+        });
+    }
+    function increase(amount, sumPrice, price) {
+         var number = $('#' + amount).val();
+          
+        var number1 = Number(number) + 1;
+
+        $('#' + amount).val(number1);
+        var sumPrice1 = number1 * price;
+        $('#' + sumPrice).html(sumPrice1 + ' VND');
+        $.ajax({
+            type: "POST",
+            url: "/Cart/updateCart/",
+            data: { IdGoods: amount, Amount: number1, SumMoney: sumPrice1 },
+
+            dataType: "json",
+            success: function () {
+
+            }
+
+        });
+    }
+    function decrease(amount, sumPrice, price) {
+        var number = $('#' + amount).val();
+ 
+        var number1 = Number(number) - 1;
+        if (number1 == 0) {
+            $('#' + amount).val(1+' VND');
+        }
+        else {
+            $('#' + amount).val(number1);
+            var sumPrice1 = number1 * price;
+            $('#' + sumPrice).html(sumPrice1 + ' VND');
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Cart/updateCart/",
+            data: { IdGoods: amount, Amount: number1, SumMoney: sumPrice1 },
+
+            dataType: "json",
+            success: function () {
+
+            }
+
+        });
+    }
+</script>

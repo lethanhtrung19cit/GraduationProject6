@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "Room";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listR = (List<GraduationProject.Models.GoodsModel>)ViewBag.listGLR;
+    var listP = (List<GraduationProject.Models.GoodsModel>)ViewBag.listProduct;
+    var listQuality = (List<GraduationProject.Models.EF.TableComment>)ViewBag.listQuality;
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+ 
+<style>
+    .living a li:hover {
+        background: #d6ae69;
+    }
+
+    .living a {
+        text-decoration: none
+    }
+</style>
+<div class="row">
+    <div class="col-md-3" style="margin-left:-18px">
+        <ul id="catalog" class="living" style="width: 200px; border-right: 1px solid #bbb6b6">
+            <h2> Danh mục</h2>
+            <a href="@Url.Action("Room", "Goods", new { id = Session["Id"].ToString() })">
+                <li style="padding:10px">Tất cả danh mục</li>
+            </a>
+            @foreach (var a2 in listP)
+            {
+                
+                <a href="@Url.Action("Search", "Goods", new { nameSearch = a2.goodsModel.IdTypeG , nameRoom=Session["Id"].ToString() })">
+                    <li style="padding:10px"> @a2.productModel.NameTypeG</li>
+                </a>
+                
+             }
+ 
+        
+         </ul>
+            <script>
+                var $li = $('#catalog li').click(function (e) {
+
+                    $li.removeClass('selected');
+                    $(this).addClass('selected');
+                });
+
+
+            </script>
+            <hr />
+            <ul class="living" style="width: 200px; border-right: 1px solid #bbb6b6">
+                <h3> Bộ lọc tìm kiếm</h3>
+                <hr />
+                <h4 style="padding-left:10px"> Khoảng Giá </h4>
+                <li style="padding:10px">
+
+                    <input id="ses" name="room" type="hidden" value="@Session["ID"].ToString()" />
+
+                    <b>Từ</b> <input id="fromPrice" name="fromPrice" style="margin-right:10px; width:120px; height:30px; padding:0" type="number" placeholder="Từ" /><br />
+                    <b> Đến</b> <input id="toPrice" name="toPrice" style="margin:10px 0 0 0; width: 120px; padding: 0; height:30px" type="number" placeholder="Đến" />
+                    <div style="margin-top:20px">
+                        @Html.ActionLink("Áp dụng", "SearchPrice", null, new { id = "SearchPrice1", Style = "padding: 15px;background: red;color: white;font-weight: bold;border-radius: 7px;" })
+                    </div>
+
+                </li>
+        </div>
+        <script>
+            $('#SearchPrice1').click(function (e) {
+                e.preventDefault();
+                window.location.href = $(this).attr('href') + '?room=' + $('#ses').val() + '&fromPrice=' + $('#fromPrice').val() + '&toPrice=' + $('#toPrice').val();
+            });
+        </script>
+        <div class="col-md-9" style="margin-left:-50px">
+            @if (Session["Id"].ToString() == "LR")
+            {
+                <h2>Đồ dùng phòng khách</h2>
+            }
+            else if (Session["Id"].ToString() == "DR")
+            {
+                <h2>Đồ dùng phòng ăn</h2>
+            }
+            else if (Session["Id"].ToString() == "WR")
+            {
+                <h2>Đồ dùng phòng làm việc</h2>
+            }
+            else 
+            {
+                <h2>Đồ dùng phòng ngủ</h2>
+            }
+            <hr style="width:1000px" />
+            <div class="row" style="width: 940px; background: #e4e2e2">
+                <div style="margin-left:20px; margin-right:10px">
+
+                    @foreach (var a in listR)
+                    {
+                        int count = 0; int average = 0;
+                        foreach (var a1 in listQuality)
+                        {
+                            if (a.goodsModel.IdGoods == a1.IdGoods)
+                            {
+                                count++;
+                                string quality = a1.Quality.ToString();
+                                average += int.Parse(quality);
+                            }
+
+                        }
+                        if (average != 0)
+                        {
+                            average /= count;
+
+                        }
+                        var url = "/chi-tiet-san-pham/" + a.goodsModel.NameGoods + "-" + a.goodsModel.IdGoods;
+                        <div class="col-md-3" style="width:300px">
+                            <center>
+                                <div class="imag" style="width:250px;height:350px; margin-top:20px">
+
+                                    <a style="text-decoration:none" href="@url">
+                                        <img src="@a.goodsModel.Image" width="300px" height="250px" />
+                                        <div><h4>@a.goodsModel.NameGoods</h4></div>
+                                        <div style="margin-bottom:-12px">
+                                            @for (int i = 0; i < average; i++)
+                                            {
+                                                <i style="color: #b9b94f" class="fa fa-star"></i>
+                                            }
+                                        </div>
+                                        <h3 style="color:red; text-align:center">@a.goodsModel.Price.ToString("#,###", info) VNĐ </h3>
+                                    </a>
+
+                                </div>
+                            </center>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function searchProduct() {
+
+            var fromPrice = $('#fromPrice').val();
+            var toPrice = $('#toPrice').val();
+            var session = $('#session').val();
+            $.ajax({
+                type: "POST",
+                url: "/Room/SearchPrice/",
+                data: { room: session, fromPrice: fromPrice, toPrice: toPrice },
+
+                dataType: "json",
+                success: function () {
+                }
+
+            });
+
+
+        }
+    </script>
+
+
+

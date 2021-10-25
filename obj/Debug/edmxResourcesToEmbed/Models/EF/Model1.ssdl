@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FurnitureModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PassWord" Type="varchar" MaxLength="40" />
+    <Property Name="Role" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="IdCart" />
+    </Key>
+    <Property Name="IdCart" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCu" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="IdCu" />
+    </Key>
+    <Property Name="IdCu" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="NameCu" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="char" MaxLength="10" />
+    <Property Name="Address" Type="ntext" />
+  </EntityType>
+  <EntityType Name="DesignFurniture">
+    <Key>
+      <PropertyRef Name="IdDe" />
+    </Key>
+    <Property Name="IdDe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameDe" Type="ntext" />
+    <Property Name="NameProject" Type="ntext" />
+    <Property Name="Area" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="ntext" />
+    <Property Name="ImageDe" Type="text" />
+    <Property Name="Content" Type="ntext" />
+  </EntityType>
+  <EntityType Name="DetailCart">
+    <Key>
+      <PropertyRef Name="IdDeCart" />
+    </Key>
+    <Property Name="IdDeCart" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCart" Type="int" />
+    <Property Name="IdGoods" Type="varchar" MaxLength="10" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="SumMoney" Type="real" />
+    <Property Name="Status" Type="nvarchar" MaxLength="30" />
+    <Property Name="ReadyBuy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetailImportGoods">
+    <Key>
+      <PropertyRef Name="IdDeIm" />
+    </Key>
+    <Property Name="IdDeIm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdIm" Type="varchar" MaxLength="10" />
+    <Property Name="IdGoods" Type="varchar" MaxLength="10" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="SumMoney" Type="real" />
+  </EntityType>
+  <EntityType Name="DetailOrder">
+    <Key>
+      <PropertyRef Name="IdDeOrder" />
+    </Key>
+    <Property Name="IdDeOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDeCart" Type="int" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DisCount">
+    <Key>
+      <PropertyRef Name="IdDi" />
+    </Key>
+    <Property Name="IdDi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdGoods" Type="varchar" MaxLength="10" />
+    <Property Name="Price2" Type="real" />
+  </EntityType>
+  <EntityType Name="Goods">
+    <Key>
+      <PropertyRef Name="IdGoods" />
+    </Key>
+    <Property Name="IdGoods" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="IdTypeG" Type="int" />
+    <Property Name="NameGoods" Type="nvarchar" MaxLength="50" />
+    <Property Name="Size" Type="nvarchar" MaxLength="100" />
+    <Property Name="Color" Type="nvarchar" MaxLength="40" />
+    <Property Name="Material" Type="ntext" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="Price" Type="real" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="Recommend" Type="ntext" />
+  </EntityType>
+  <EntityType Name="ImportGoods">
+    <Key>
+      <PropertyRef Name="IdIm" />
+    </Key>
+    <Property Name="IdIm" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="DateCreate" Type="date" />
+    <Property Name="IdSu" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="ListRequest">
+    <Key>
+      <PropertyRef Name="IdRe" />
+    </Key>
+    <Property Name="IdRe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateRe" Type="datetime" />
+    <Property Name="NameCustomer" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="char" MaxLength="10" />
+    <Property Name="Adress" Type="ntext" />
+    <Property Name="TypeProject" Type="nvarchar" MaxLength="20" />
+    <Property Name="Service" Type="nvarchar" MaxLength="30" />
+    <Property Name="ContentRequest" Type="ntext" />
+  </EntityType>
+  <EntityType Name="ListTypeGoods">
+    <Key>
+      <PropertyRef Name="IdTypeG" />
+    </Key>
+    <Property Name="IdTypeG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdRoom" Type="varchar" MaxLength="10" />
+    <Property Name="NameTypeG" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Furniture.dbo.SubImage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SubImage">
+    <Key>
+      <PropertyRef Name="IdSubImage" />
+      <PropertyRef Name="IdGoods" />
+    </Key>
+    <Property Name="IdSubImage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdGoods" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="SubImage" Type="text" />
+  </EntityType>
+  <EntityType Name="SubImgDesign">
+    <Key>
+      <PropertyRef Name="IdSub" />
+    </Key>
+    <Property Name="IdSub" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDe" Type="int" />
+    <Property Name="ImageSubDe" Type="text" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="IdSu" />
+    </Key>
+    <Property Name="IdSu" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="NameSu" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="30" />
+    <Property Name="Phone" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TableComment">
+    <Key>
+      <PropertyRef Name="IdCommnet" />
+    </Key>
+    <Property Name="IdCommnet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdGoods" Type="varchar" MaxLength="10" />
+    <Property Name="IdCu" Type="varchar" MaxLength="10" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="Comment" Type="ntext" />
+    <Property Name="Quality" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="TypeGoods">
+    <Key>
+      <PropertyRef Name="IdType" />
+    </Key>
+    <Property Name="IdType" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="NameType" Type="nvarchar" MaxLength="40" />
+  </EntityType>
+  <Association Name="FK_Cart_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IdCu" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="IdCu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailCart_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+    <End Role="DetailCart" Type="Self.DetailCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="IdCart" />
+      </Principal>
+      <Dependent Role="DetailCart">
+        <PropertyRef Name="IdCart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailImportGoods_ImportGoods">
+    <End Role="ImportGoods" Type="Self.ImportGoods" Multiplicity="0..1" />
+    <End Role="DetailImportGoods" Type="Self.DetailImportGoods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ImportGoods">
+        <PropertyRef Name="IdIm" />
+      </Principal>
+      <Dependent Role="DetailImportGoods">
+        <PropertyRef Name="IdIm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailOrder_DetailCart">
+    <End Role="DetailCart" Type="Self.DetailCart" Multiplicity="0..1" />
+    <End Role="DetailOrder" Type="Self.DetailOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetailCart">
+        <PropertyRef Name="IdDeCart" />
+      </Principal>
+      <Dependent Role="DetailOrder">
+        <PropertyRef Name="IdDeCart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DisCount_Goods">
+    <End Role="Goods" Type="Self.Goods" Multiplicity="0..1" />
+    <End Role="DisCount" Type="Self.DisCount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="IdGoods" />
+      </Principal>
+      <Dependent Role="DisCount">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Goods_ListTypeGoods">
+    <End Role="ListTypeGoods" Type="Self.ListTypeGoods" Multiplicity="0..1" />
+    <End Role="Goods" Type="Self.Goods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListTypeGoods">
+        <PropertyRef Name="IdTypeG" />
+      </Principal>
+      <Dependent Role="Goods">
+        <PropertyRef Name="IdTypeG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ImportGoods_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="ImportGoods" Type="Self.ImportGoods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="IdSu" />
+      </Principal>
+      <Dependent Role="ImportGoods">
+        <PropertyRef Name="IdSu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListTypeGoods_TypeGoods">
+    <End Role="TypeGoods" Type="Self.TypeGoods" Multiplicity="0..1" />
+    <End Role="ListTypeGoods" Type="Self.ListTypeGoods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeGoods">
+        <PropertyRef Name="IdType" />
+      </Principal>
+      <Dependent Role="ListTypeGoods">
+        <PropertyRef Name="IdRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubImage_Goods">
+    <End Role="Goods" Type="Self.Goods" Multiplicity="1" />
+    <End Role="SubImage" Type="Self.SubImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="IdGoods" />
+      </Principal>
+      <Dependent Role="SubImage">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubImgDesign_DesignFurniture">
+    <End Role="DesignFurniture" Type="Self.DesignFurniture" Multiplicity="0..1" />
+    <End Role="SubImgDesign" Type="Self.SubImgDesign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DesignFurniture">
+        <PropertyRef Name="IdDe" />
+      </Principal>
+      <Dependent Role="SubImgDesign">
+        <PropertyRef Name="IdDe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TableComment_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="TableComment" Type="Self.TableComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IdCu" />
+      </Principal>
+      <Dependent Role="TableComment">
+        <PropertyRef Name="IdCu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TableComment_Goods">
+    <End Role="Goods" Type="Self.Goods" Multiplicity="0..1" />
+    <End Role="TableComment" Type="Self.TableComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="IdGoods" />
+      </Principal>
+      <Dependent Role="TableComment">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FurnitureModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DesignFurniture" EntityType="Self.DesignFurniture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetailCart" EntityType="Self.DetailCart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetailImportGoods" EntityType="Self.DetailImportGoods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetailOrder" EntityType="Self.DetailOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DisCount" EntityType="Self.DisCount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Goods" EntityType="Self.Goods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImportGoods" EntityType="Self.ImportGoods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListRequest" EntityType="Self.ListRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListTypeGoods" EntityType="Self.ListTypeGoods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubImgDesign" EntityType="Self.SubImgDesign" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TableComment" EntityType="Self.TableComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeGoods" EntityType="Self.TypeGoods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubImage" EntityType="Self.SubImage" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SubImage].[IdSubImage] AS [IdSubImage], 
+    [SubImage].[IdGoods] AS [IdGoods], 
+    [SubImage].[SubImage] AS [SubImage]
+    FROM [dbo].[SubImage] AS [SubImage]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Cart_Customer" Association="Self.FK_Cart_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Account" Association="Self.FK_Customer_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailCart_Cart" Association="Self.FK_DetailCart_Cart">
+      <End Role="Cart" EntitySet="Cart" />
+      <End Role="DetailCart" EntitySet="DetailCart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailImportGoods_ImportGoods" Association="Self.FK_DetailImportGoods_ImportGoods">
+      <End Role="ImportGoods" EntitySet="ImportGoods" />
+      <End Role="DetailImportGoods" EntitySet="DetailImportGoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailOrder_DetailCart" Association="Self.FK_DetailOrder_DetailCart">
+      <End Role="DetailCart" EntitySet="DetailCart" />
+      <End Role="DetailOrder" EntitySet="DetailOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DisCount_Goods" Association="Self.FK_DisCount_Goods">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="DisCount" EntitySet="DisCount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Goods_ListTypeGoods" Association="Self.FK_Goods_ListTypeGoods">
+      <End Role="ListTypeGoods" EntitySet="ListTypeGoods" />
+      <End Role="Goods" EntitySet="Goods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ImportGoods_Supplier" Association="Self.FK_ImportGoods_Supplier">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="ImportGoods" EntitySet="ImportGoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListTypeGoods_TypeGoods" Association="Self.FK_ListTypeGoods_TypeGoods">
+      <End Role="TypeGoods" EntitySet="TypeGoods" />
+      <End Role="ListTypeGoods" EntitySet="ListTypeGoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubImage_Goods" Association="Self.FK_SubImage_Goods">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="SubImage" EntitySet="SubImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubImgDesign_DesignFurniture" Association="Self.FK_SubImgDesign_DesignFurniture">
+      <End Role="DesignFurniture" EntitySet="DesignFurniture" />
+      <End Role="SubImgDesign" EntitySet="SubImgDesign" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TableComment_Customer" Association="Self.FK_TableComment_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="TableComment" EntitySet="TableComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TableComment_Goods" Association="Self.FK_TableComment_Goods">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="TableComment" EntitySet="TableComment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

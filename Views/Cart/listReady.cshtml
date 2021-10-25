@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "listReady";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listReady = (List<GraduationProject.Models.GoodsModel>)ViewBag.listReadyBuy;
+    float sumPrice1 = 0;
+    float sumP = 0;
+}
+
+<h2>Danh sách hàng nội thất đặt mua</h2>
+<div>
+    
+    <table style="width:1185px">
+
+        <tr style="font-size:20px">
+             <th>Sản phẩm</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Số tiền</th>
+         </tr>
+
+        @foreach (var a in listReady)
+        {
+
+            float sumPrice = a.goodsModel.Price * a.detailCartModel.Amount;
+
+            <tr>
+                
+                <td style="font-size:17px"><img src="@a.goodsModel.Image" style=" width: 200px; height: 150px; border: solid 2px #996565;" /> @a.goodsModel.NameGoods</td>
+                <td>@a.goodsModel.Price.ToString("0") VND</td>
+                <td>
+                    @a.detailCartModel.Amount
+                     <input style="width:50px; padding:7px" id="@a.detailCartModel.IdGoods" type="hidden" value="@a.detailCartModel.Amount" />
+                 </td>
+                <td data-id="@sumPrice.ToString("0")" style="color: #fb471e; font-weight:bold">@sumPrice.ToString("0") VND</td>
+                
+            </tr>
+            sumPrice1 += sumPrice;
+        }
+
+    </table>
+    <div>
+        @foreach (var a in listReady)
+        {
+            <div style="color:red; font-size:19px">Địa Chỉ Nhận Hàng</div>
+            <div style="font-size:18px">
+
+                <b>@a.customerModel.NameCu</b>
+                <b>@a.customerModel.Phone</b>
+                @a.customerModel.Address
+                @if (a.customerModel.Address == null)
+                {
+                    <a href="@Url.Action("Information", "Account")">Thiết lập địa chỉ</a>
+                }
+            </div>
+            
+        }
+        
+    </div>
+    <div style="margin-top:30px; font-size:19px">
+
+        @{
+            sumP = sumPrice1 + 50000;
+
+        }
+
+        Tổng tiền hàng : @sumPrice1.ToString("0")<br />
+        Phí vận chuyển : 50000 VNĐ <br />
+        Tổng thanh toán: <label style="color:red">@sumP.ToString("0") VNĐ</label>
+        @using (Html.BeginForm("buyProduct", "Cart"))
+        {
+            foreach (var item in listReady)
+            {
+                <input name="IdGoods" type="hidden" value="@item.goodsModel.IdGoods"/>
+                <input name="Amount" type="hidden" value="@item.detailCartModel.Amount"/>
+                <input name="IdDeCart" type="hidden" value="@item.detailCartModel.IdDeCart"/>
+                <input name="Address" type="hidden" value="@item.customerModel.Address"/>
+            }
+            <input type="submit" value="Mua hàng" style="text-decoration:none;padding:10px; color:white; font-weight:bold; background:red"/>
+        }
+    </div>
+</div>

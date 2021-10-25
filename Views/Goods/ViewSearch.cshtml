@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ViewSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var viewSearch = (List<GraduationProject.Models.EF.Good>)ViewBag.searchProduct;
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+<div>
+    <h2 style="color:red">Từ khóa tìm kiếm: @ViewBag.nameProduct</h2>
+
+    @if (viewSearch.Count < 1)
+    {
+        <div> <h3>Không có sản phẩm nào</h3> </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var a in viewSearch)
+            {
+                var url = "/chi-tiet-san-pham/" + a.NameGoods + "-" + a.IdGoods;
+
+                <div class="col-md-3">
+
+                    <a style="text-decoration:none" href="@url">
+
+                        <img src="@a.Image" width="250px" height="200px" />
+                        <div><h4 style="text-align:center">@a.NameGoods</h4></div>
+
+                        <h3 style="color:red; text-align:center">@a.Price.ToString("#,###", info) VNĐ </h3>
+                    </a>
+                </div>
+            }
+
+        </div>
+    }
+
+</div>
+
+

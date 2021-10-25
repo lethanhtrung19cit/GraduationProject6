@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/slide.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+
+    <link href="~/Content/tabcontrol.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap1.css" rel="stylesheet" />
+    <link href="~/Content/icon.css" rel="stylesheet" />
+    <link href="~/Content/icon.css" rel="stylesheet" />
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/tabcontrol.js"></script>
+    <style>
+        li.selected {
+            background: yellow;
+            color: red;
+        }
+
+        #account {
+            display: none;
+            position: absolute;
+            top: 45px;
+            left: -70px;
+            background-color: #f9f9f9;
+            min-width: 280px;
+            z-index: 1;
+        }
+
+            #account a {
+                display: block;
+                padding: 15px;
+                font-size: 17px;
+            }
+    </style>
+
+</head>
+<body>
+
+    <div>
+        <div class="row" style=" background: #504444;">
+            <div class="col-md-2" style="margin-left:50px">
+                <img src="~/images/logo.jpg" />
+             </div>
+
+            <div class="col-md-6" style="width:700px; margin-left:10px">
+                     <h1 style="color: #bf8c1b; text-shadow: 2px 2px; padding-left:70px">ĐỒ NỘI THẤT UNIQUE DECOR</h1>
+                    <h3 style="color: #c79563; font-family: cursive; font-size: 28px; padding-left:40px">Tô điểm thế giới bên trong ngôi nhà của bạn</h3>
+                    @using (Html.BeginForm("ViewSearch", "Goods"))
+                    {
+                        <input class="form-control" placeholder="Tìm kiếm sản phẩm" name="nameProduct" type="text" style="float:left; padding: 10px; max-width:520px; width: 520px; height: 45px;" />
+                        <button style="float: left; margin-left:10px; background: #f57223; color:white; width: 50px; height:45px; font-size:22px" type="submit" class="btn btn-group"><i class="fa fa-search"></i></button>
+                    }
+                    <a href="@Url.Action("DetailCart", "Cart")"> <i class="fa fa-shopping-cart" style=" float: left; font-size: 45px; color: #b1884b; margin-left: 20px;"></i></a>
+
+ 
+            </div>
+            
+            <div class="col-md-3" style="font-size:20px; margin-left:-15px">
+                
+                    <div style="height:120px">
+                        <div><h3 style="color: #e95656; font-weight: bold; font-size: 30px;">Hỗ trợ khách hàng</h3> </div>
+                        <img src="~/images/hotline.gif" style="width:270px; height:100px">
+
+                    </div>
+                    <div style="color:orangered; margin-top:6px">
+                        @if (Session["NameCu"] == null)
+                        {
+                            <a style="padding-right: 20px; color: #c79563; border-right: 1px solid #c36833;" href="@Url.Action("Login","Account")">Đăng nhập</a>
+                            <a style="color: #c79563;" href="#">Đăng ký</a>
+
+                        }
+                        else
+                        {
+                            <div class="dropdown" style="margin-left:70px">
+                                <div onclick="user()" style="cursor:pointer; color: orangered; font-weight: bold; width: 180px; height: 45px;">
+                                    @Session["NameCu"].ToString()
+                                </div>
+                                <div style="z-index:1000" id="account" onmouseleave="hideFunction()">
+                                    <a href="@Url.Action("Information", "Account")"><i style="margin-right:10px" class="fa fa-user"></i>Quản lý tài khoản</a>
+                                    <a href="@Url.Action("listOrder", "Cart")"><i style="margin-right:10px" class="fa fa-shopping-bag"></i>Quản lý đơn hàng</a>
+                                    <a href="@Url.Action("myComment", "Goods")"><i style="margin-right:10px" class="fa fa-comment"></i>Nhận xét của tôi</a>
+                                    <a href="@Url.Action("Login", "Account")"><i style="margin-right:10px" class="fa fa-external-link-alt"></i>Đăng xuất</a>
+                                </div>
+                            </div>
+                         }
+                    </div>
+                
+                    <script>
+                        function user() {
+                            document.getElementById("account").style.display= "block";
+                        }
+                        function hideFunction() {
+                            document.getElementById("account").style.display = "none";
+
+                        }
+                    </script>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="wd-btn-career" style="height: 45px; background: #869dde;">
+        <div class="wd-center" style="background:white">
+            <ul class="home" style="font-weight:bold">
+                <li class="active" style="width:365px">
+                    <a href="@Url.Action("Index", "Home")">
+                        <span class="navbar1"><i class="fas fa-home"></i></span>
+                        TRANG CHỦ
+                    </a>
+                </li>
+                <li class="notifi" style="background: #42403b; padding-right: 300px; width: 225px; font-size: 16px; line-height: 39px">
+
+                    <div class="dropdown" style="margin-left:70px">
+                        <div class="dropbtn" style="color: white; font-weight: bold; width: 200px; height: 45px;">
+                            <span style="font-size:24px; margin-right:10px">
+                                <i style="margin-left:-55px" class="fab fa-wpforms"></i>
+                            </span>
+
+                            DANH MỤC SẢN PHẨM
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown-content" style="z-index:1000">
+                            <a href="@Url.Action("Room", "Goods", new { id="LR"})">phòng khách</a>
+                            <a href="@Url.Action("Room", "Goods", new { id="DR"})">phòng ăn</a>
+                            <a href="@Url.Action("Room", "Goods", new { id="BR"})">phòng ngủ</a>
+                            <a href="@Url.Action("Room", "Goods", new { id="WR"})">phòng làm việc</a>
+                        </div>
+                    </div>
+
+                </li>
+                <li style="width:165px">
+                    <a href="@Url.Action("About", "Home")">
+                        <span class="navbar1"><i class="fa fa-address-card"></i></span>
+                        giới thiệu
+                    </a>
+                </li>
+
+                <li style="width:325px">
+                    <a href="@Url.Action("DesignFurniture", "DesignFurniture")">
+                        <span class="navbar1"><i class="fa fa-pencil-square"></i></span>
+                        thiết kế nội thất
+                    </a>
+                </li>
+
+
+
+                <li style="width:165px">
+                    <a href="@Url.Action("Contact", "Home")">
+                        <span class="navbar1"><i class="fa fa-phone"></i></span>
+                        liên hệ
+                    </a>
+                </li>
+
+
+
+
+                @*<li class="notifi" style="background: #f7bf30; padding-right: 300px;">
+
+                        <div class="dropdown" style="margin-left:70px">
+                            <div class="dropbtn" style="color: white; font-weight: bold; width: 200px; height: 45px;">
+                                <span style="font-size:24px; margin-right:10px"><i class="fa fa-user"></i></span>
+
+                                ĐĂNG NHẬP
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <div class="dropdown-content">
+                                <a href="@Url.Action("Index", "Login", new { id = "2" })">TRANG GIẢNG VIÊN</a>
+                                <a href="@Url.Action("Index", "Login", new { id = "1" })">PHÒNG NGHIÊN CỨU</a>
+                            </div>
+                        </div>
+
+                    </li>
+
+                    <li>
+
+                        <a href="@Url.Action("Index", "Login", new { id=Session["Acess"].ToString()})">
+                            <span style="font-size:24px; margin-right:10px"><i class="fa fa-user"></i></span>
+                            đăng xuất
+                        </a>
+                    </li>*@
+
+
+
+
+            </ul>
+        </div>
+    </div>
+    <div style="margin:0 100px 0 70px">
+        @RenderBody()
+        <hr />
+
+    </div>
+    <footer style=" background: #42403b; text-align: center; padding: 20px; margin-top: -40px; color: white; font-size: 16px;">
+        <div>
+            Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn
+        </div>
+        <div>
+            Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Đức Trí -  Điện thoại liên hệ: 024 73081221 (ext 4678)
+        </div>
+        <div>
+            Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch &amp; Đầu tư TP Hà Nội cấp lần đầu ngày 10/02/2015
+        </div>
+        <div>© 2015 - Bản quyền thuộc về Công ty TNHH Shopee</div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+ 
+     @RenderSection("scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "addCommentView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@model GraduationProject.Models.EF.TableComment
+<style>
+    .col-md-7{
+        margin-bottom:20px;
+    }
+</style>
+<div style="font-size:18px">
+
+   
+        <h2>Thêm đánh giá</h2>
+        <div class="row">
+            @using (Html.BeginForm("addComment", "Goods"))
+            {
+                string IdGoods = ViewBag.IdGoods;
+                string IdCu = ViewBag.IdCu;
+                <div class="col-md-3">
+                    Mã hàng : 
+                </div>
+                <div class="col-md-7">
+                    @Html.LabelFor(x => x.IdGoods, IdGoods)
+                    @Html.HiddenFor(x => x.IdGoods, new { @Value=IdGoods})
+                </div>
+                <div class="col-md-3">
+                    Mã khách hàng: 
+                </div>
+                <div class="col-md-7">
+                    @Html.LabelFor(x => x.IdCu, IdCu, new { @Value = IdCu })
+                    @Html.HiddenFor(x => x.IdCu, new { @Value = IdCu })
+
+                </div>
+                <div class="col-md-3">
+                    Thời gian : 
+                </div>
+                <div class="col-md-7">
+                    @Html.LabelFor(x => x.Time, DateTime.Now.ToString(), new { @Value = DateTime.Now.ToString() })
+                    @Html.HiddenFor(x => x.Time, new { @Value = DateTime.Now.ToString() })
+                </div>
+                <div class="col-md-3">
+                   Đánh giá chất lượng: 
+                </div>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(x => x.Quality, new { @Class = "form-control", type = "number" })
+                </div>
+                <div class="col-md-3">
+                    Thêm nhận xét: 
+                </div>
+                <div class="col-md-7">
+                    @Html.TextAreaFor(x => x.Comment, new { @Class = "form-control", @style= "max-width: 500px;height: 140px" })
+                </div>
+                <div class="col-md-5">
+                    <input class="btn btn-group" type="submit" value="Đánh giá" />
+
+                </div>
+
+            }
+        </div>
+        
+      
+</div>
+
+
